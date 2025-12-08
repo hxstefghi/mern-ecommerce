@@ -98,6 +98,22 @@ export default function Navbar() {
                       >
                         Profile
                       </Link>
+                      <Link
+                        to="/my-orders"
+                        onClick={() => setIsDropdownOpen(false)}
+                        className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-light transition-colors"
+                      >
+                        My Orders
+                      </Link>
+                      {user.role === "admin" && (
+                        <Link
+                          to="/admin"
+                          onClick={() => setIsDropdownOpen(false)}
+                          className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-light transition-colors"
+                        >
+                          Admin Dashboard
+                        </Link>
+                      )}
                       <button
                         onClick={() => {
                           logout();
@@ -191,6 +207,22 @@ export default function Navbar() {
                   >
                     Profile ({user.name})
                   </Link>
+                  <Link
+                    to="/my-orders"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
+                  >
+                    My Orders
+                  </Link>
+                  {user.role === "admin" && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
+                    >
+                      Admin Dashboard
+                    </Link>
+                  )}
                   <button
                     onClick={() => {
                       logout();

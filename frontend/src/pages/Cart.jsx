@@ -24,10 +24,7 @@ export default function Cart() {
     );
   }
 
-  const handleCheckout = () => {
-    alert("Checkout functionality coming soon!");
-    // In a real app, this would navigate to checkout or process payment
-  };
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -114,12 +111,12 @@ export default function Cart() {
                   </div>
                 </div>
               </div>
-              <button
-                onClick={handleCheckout}
-                className="w-full bg-gray-900 text-white py-4 hover:bg-gray-800 transition-colors mb-3 text-sm font-light tracking-wide"
+              <Link
+                to="/checkout"
+                className="block text-center w-full bg-gray-900 text-white py-4 hover:bg-gray-800 transition-colors mb-3 text-sm font-light tracking-wide"
               >
                 CHECKOUT
-              </button>
+              </Link>
               <button
                 onClick={clearCart}
                 className="w-full border border-gray-200 text-gray-600 py-3 hover:border-gray-900 hover:text-gray-900 transition-colors text-sm font-light"

@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import Product from "./models/Product.js";
+import User from "./models/User.js";
+import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -84,11 +86,43 @@ async function seedDatabase() {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to MongoDB");
 
+    // Clear existing data
     await Product.deleteMany({});
     console.log("Cleared existing products");
 
+    // Seed products
     await Product.insertMany(products);
     console.log("Seeded database with products");
+
+    // Create admin user if doesn't exist
+    const adminExists = await User.findOne({ email: "admin@example.com" });
+    if (!adminExists) {
+      const hashedPassword = await bcrypt.hash("admin123", 10);
+      await User.create({
+        name: "Admin",
+        email: "admin@example.com",
+        password: hashedPassword,
+        role: "admin"
+      });
+      console.log("Created admin user (email: admin@example.com, password: admin123)");
+    } else {
+      console.log("Admin user already exists");
+    }
+
+    // Create regular user if doesn't exist
+    const userExists = await User.findOne({ email: "user@example.com" });
+    if (!userExists) {
+      const hashedPassword = await bcrypt.hash("user123", 10);
+      await User.create({
+        name: "Test User",
+        email: "user@example.com",
+        password: hashedPassword,
+        role: "user"
+      });
+      console.log("Created test user (email: user@example.com, password: user123)");
+    } else {
+      console.log("Test user already exists");
+    }
 
     process.exit(0);
   } catch (error) {
