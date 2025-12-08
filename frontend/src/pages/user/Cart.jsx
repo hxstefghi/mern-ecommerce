@@ -1,9 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 
 export default function Cart() {
+  const { user } = useAuth();
   const { cart, removeFromCart, updateQuantity, cartTotal, clearCart } =
     useCart();
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    if (!user) {
+      toast.error("Please login to proceed with checkout");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+      return;
+    }
+    navigate("/checkout");
+  };
 
   if (cart.length === 0) {
     return (
@@ -111,12 +126,12 @@ export default function Cart() {
                   </div>
                 </div>
               </div>
-              <Link
-                to="/checkout"
+              <button
+                onClick={handleCheckout}
                 className="block text-center w-full bg-gray-900 text-white py-4 hover:bg-gray-800 transition-colors mb-3 text-sm font-light tracking-wide"
               >
                 CHECKOUT
-              </Link>
+              </button>
               <button
                 onClick={clearCart}
                 className="w-full border border-gray-200 text-gray-600 py-3 hover:border-gray-900 hover:text-gray-900 transition-colors text-sm font-light"

@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import api from "../lib/api";
 import { useCart } from "../context/CartContext";
 
@@ -26,7 +27,7 @@ export default function ProductDetail() {
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
-    alert("Added to cart!");
+    toast.success(`${quantity} ${quantity > 1 ? 'items' : 'item'} added to cart!`);
   };
 
   if (loading) {

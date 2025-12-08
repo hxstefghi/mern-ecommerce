@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 import { useCart } from "../context/CartContext";
 
 export default function ProductCard({ product }) {
@@ -8,6 +9,7 @@ export default function ProductCard({ product }) {
     e.preventDefault();
     e.stopPropagation();
     addToCart(product);
+    toast.success("Item added to cart!");
   };
 
   return (
