@@ -1,12 +1,26 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const { cartItemsCount } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <nav className="border-b border-gray-100 sticky top-0 z-50 backdrop-blur-sm bg-white/90">
@@ -19,7 +33,7 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             <Link
-              to="/"
+              to="/products"
               className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
             >
               Products
@@ -50,16 +64,52 @@ export default function Navbar() {
             </Link>
 
             {user ? (
-              <div className="flex items-center gap-6">
-                <span className="text-sm text-gray-600 font-light">
-                  {user.name}
-                </span>
+              <div className="relative" ref={dropdownRef}>
                 <button
-                  onClick={logout}
-                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="text-gray-600 hover:text-gray-900 transition-colors focus:outline-none flex items-center"
                 >
-                  Logout
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
                 </button>
+
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 shadow-lg z-50">
+                    <div className="py-2">
+                      <div className="px-4 py-2 border-b border-gray-100">
+                        <p className="text-xs text-gray-500 font-light">Signed in as</p>
+                        <p className="text-sm text-gray-900 font-light truncate">{user.name}</p>
+                      </div>
+                      <Link
+                        to="/profile"
+                        onClick={() => setIsDropdownOpen(false)}
+                        className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-light transition-colors"
+                      >
+                        Profile
+                      </Link>
+                      <button
+                        onClick={() => {
+                          logout();
+                          setIsDropdownOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-light transition-colors"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="flex items-center gap-6">
@@ -125,7 +175,7 @@ export default function Navbar() {
           <div className="md:hidden border-t border-gray-100 py-4">
             <div className="flex flex-col space-y-4">
               <Link
-                to="/"
+                to="/products"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
               >
@@ -134,9 +184,13 @@ export default function Navbar() {
 
               {user ? (
                 <>
-                  <span className="text-sm text-gray-600 font-light">
-                    {user.name}
-                  </span>
+                  <Link
+                    to="/profile"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
+                  >
+                    Profile ({user.name})
+                  </Link>
                   <button
                     onClick={() => {
                       logout();

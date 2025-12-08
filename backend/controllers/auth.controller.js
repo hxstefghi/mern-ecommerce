@@ -43,3 +43,39 @@ export const getMe = async (req, res) => {
   }
   res.json(user);
 };
+
+export const updateProfile = async (req, res) => {
+  const { name, currentPassword, newPassword } = req.body;
+
+  try {
+    const user = await User.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Update name
+    if (name) {
+      user.name = name;
+    }
+
+    // Update password if provided
+    if (newPassword) {
+      if (!currentPassword) {
+        return res.status(400).json({ message: "Current password is required" });
+      }
+
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ message: "Current password is incorrect" });
+      }
+
+      user.password = await bcrypt.hash(newPassword, 10);
+    }
+
+    await user.save();
+
+    res.json({ message: "Profile updated successfully", user: { _id: user._id, name: user.name, email: user.email } });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating profile" });
+  }
+};
