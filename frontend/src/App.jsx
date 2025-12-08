@@ -5,20 +5,24 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail";
 import Products from "./pages/Products";
-import Profile from "./pages/Profile";
-import Checkout from "./pages/Checkout";
-import MyOrders from "./pages/MyOrders";
-import OrderDetail from "./pages/OrderDetail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import AdminDashboard from "./pages/AdminDashboard";
-import AdminProducts from "./pages/AdminProducts";
-import AdminOrders from "./pages/AdminOrders";
-import AdminUsers from "./pages/AdminUsers";
-import AdminCategories from "./pages/AdminCategories";
+
+// User Pages
+import Cart from "./pages/user/Cart";
+import Profile from "./pages/user/Profile";
+import Checkout from "./pages/user/Checkout";
+import MyOrders from "./pages/user/MyOrders";
+import OrderDetail from "./pages/user/OrderDetail";
+
+// Admin Pages
+import AdminDashboard from "./pages/admin/Dashboard";
+import AdminProducts from "./pages/admin/Products";
+import AdminOrders from "./pages/admin/Orders";
+import AdminUsers from "./pages/admin/Users";
+import AdminCategories from "./pages/admin/Categories";
 
 export default function App() {
   return (
