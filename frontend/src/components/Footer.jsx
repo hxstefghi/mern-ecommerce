@@ -8,7 +8,7 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-light tracking-wider mb-4 text-gray-900">STORE</h3>
             <p className="text-sm text-gray-500 font-light leading-relaxed">
-              Quality products for modern living
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, aliquam!
             </p>
             <div className="flex gap-4 mt-6">
               <a 
@@ -90,17 +90,17 @@ export default function Footer() {
             <h4 className="text-sm font-light mb-4 text-gray-900 tracking-wide">SUPPORT</h4>
             <ul className="space-y-3 text-sm text-gray-500 font-light">
               <li>
-                <a href="#" className="hover:text-gray-900 transition-colors">
+                <Link to="/contact" className="hover:text-gray-900 transition-colors">
                   Contact
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-900 transition-colors">
+                <a href="/" className="hover:text-gray-900 transition-colors">
                   FAQ
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-900 transition-colors">
+                <a href="/" className="hover:text-gray-900 transition-colors">
                   Shipping
                 </a>
               </li>

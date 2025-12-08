@@ -24,21 +24,43 @@ export default function Navbar() {
 
   return (
     <nav className="border-b border-gray-100 sticky top-0 z-50 backdrop-blur-sm bg-white/90">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex justify-between items-center h-16 md:h-20">
-          <Link to="/" className="text-lg md:text-xl font-light tracking-wider text-gray-900 hover:text-gray-600 transition-colors">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="relative flex justify-between items-center h-16 md:h-20">
+          {/* Left: Logo */}
+          <Link to="/" className="text-lg md:text-xl font-light tracking-wider text-gray-900 hover:text-gray-600 transition-colors z-10">
             STORE
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Center: Main Navigation (Desktop) - Absolutely positioned */}
+          <div className="hidden md:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
+            <Link
+              to="/"
+              className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
+            >
+              Home
+            </Link>
             <Link
               to="/products"
               className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
             >
               Products
             </Link>
+            <Link
+              to="/about"
+              className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
+            >
+              About
+            </Link>
+            <Link
+              to="/contact"
+              className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
+            >
+              Contact
+            </Link>
+          </div>
 
+          {/* Right: Cart & Auth (Desktop) */}
+          <div className="hidden md:flex items-center gap-6 z-10">
             <Link
               to="/cart"
               className="relative text-sm text-gray-600 hover:text-gray-900 transition-colors font-light flex items-center gap-2"
@@ -191,11 +213,32 @@ export default function Navbar() {
           <div className="md:hidden border-t border-gray-100 py-4">
             <div className="flex flex-col space-y-4">
               <Link
+                to="/"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
+              >
+                Home
+              </Link>
+              <Link
                 to="/products"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
               >
                 Products
+              </Link>
+              <Link
+                to="/about"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
+              >
+                About
+              </Link>
+              <Link
+                to="/contact"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light"
+              >
+                Contact
               </Link>
 
               {user ? (
