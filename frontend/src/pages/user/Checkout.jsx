@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { useCart } from "../context/CartContext";
-import api from "../lib/api";
-import Footer from "../components/Footer";
+import { useAuth } from "../../context/AuthContext";
+import { useCart } from "../../context/CartContext";
+import api from "../../lib/api";
+import Footer from "../../components/Footer";
 
 export default function Checkout() {
   const { user } = useAuth();

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import api from "../lib/api";
+import { useAuth } from "../../context/AuthContext";
+import api from "../../lib/api";
 
 export default function AdminOrders() {
   const { user, authLoading } = useAuth();

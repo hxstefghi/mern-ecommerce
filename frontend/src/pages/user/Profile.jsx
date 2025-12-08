@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import api from "../lib/api";
+import api from "../../lib/api";
 
 export default function Profile() {
   const { user, logout } = useAuth();
