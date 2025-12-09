@@ -21,10 +21,10 @@ export default function About() {
               About Us
             </h1>
             <p className="text-lg md:text-xl font-light text-gray-600 leading-relaxed">
-              We are passionate about curating the finest selection of products that enhance your everyday living experience.
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur debitis accusamus dolorum ex optio est. In obcaecati ab omnis cum.
             </p>
             <p className="text-base md:text-lg font-light text-gray-500 leading-relaxed">
-              Every item is thoughtfully selected to ensure it meets our standards of design, functionality, and sustainability. Our mission is to provide exceptional products that inspire and elevate modern living.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit architecto animi in nulla quaerat eaque quos accusamus atque molestias, ipsam accusantium. Temporibus ducimus laboriosam suscipit non numquam esse qui at!
             </p>
             
             {/* Values */}
@@ -32,19 +32,19 @@ export default function About() {
               <div>
                 <h3 className="text-sm font-light text-gray-900 uppercase tracking-wide mb-2">Quality</h3>
                 <p className="text-sm font-light text-gray-500 leading-relaxed">
-                  Every product is carefully selected for excellence
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, id.
                 </p>
               </div>
               <div>
                 <h3 className="text-sm font-light text-gray-900 uppercase tracking-wide mb-2">Design</h3>
                 <p className="text-sm font-light text-gray-500 leading-relaxed">
-                  Beautiful and functional pieces for modern living
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sit?
                 </p>
               </div>
               <div>
                 <h3 className="text-sm font-light text-gray-900 uppercase tracking-wide mb-2">Service</h3>
                 <p className="text-sm font-light text-gray-500 leading-relaxed">
-                  Dedicated support for an exceptional experience
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, repudiandae?
                 </p>
               </div>
             </div>

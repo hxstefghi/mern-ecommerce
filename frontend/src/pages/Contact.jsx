@@ -48,8 +48,8 @@ export default function Contact() {
             <div className="space-y-6">
               <div>
                 <h3 className="text-sm font-light text-gray-500 uppercase tracking-wide mb-2">Email</h3>
-                <a href="mailto:support@store.com" className="text-base font-light text-gray-900 hover:text-gray-600 transition-colors">
-                  support@store.com
+                <a href="mailto:christiancatuday13@gmail.com" className="text-base font-light text-gray-900 hover:text-gray-600 transition-colors">
+                  christiancatuday13@gmail.com
                 </a>
               </div>
               <div>

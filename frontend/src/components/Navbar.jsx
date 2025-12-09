@@ -89,7 +89,7 @@ export default function Navbar() {
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="text-gray-600 hover:text-gray-900 transition-colors focus:outline-none flex items-center"
+                  className="text-gray-600 cursor-pointer hover:text-gray-900 transition-colors focus:outline-none flex items-center"
                 >
                   <svg
                     className="w-5 h-5"
@@ -141,7 +141,7 @@ export default function Navbar() {
                           logout();
                           setIsDropdownOpen(false);
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-light transition-colors"
+                        className="w-full cursor-pointer text-left px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-light transition-colors"
                       >
                         Logout
                       </button>

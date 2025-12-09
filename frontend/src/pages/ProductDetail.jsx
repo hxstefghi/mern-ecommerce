@@ -54,7 +54,7 @@ export default function ProductDetail() {
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-6xl mx-auto px-6 py-12">
-        <Link to="/" className="text-sm text-gray-500 hover:text-gray-900 mb-8 inline-block font-light">
+        <Link to="/products" className="text-sm text-gray-500 hover:text-gray-900 mb-8 inline-block font-light">
           ← Back
         </Link>
 
