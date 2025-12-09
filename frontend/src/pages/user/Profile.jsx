@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import api from "../../lib/api";
 
 export default function Profile() {
-  const { user, logout } = useAuth();
+  const { user, logout, refreshUser } = useAuth();
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
+  const [isEditingAddress, setIsEditingAddress] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -17,6 +19,31 @@ export default function Profile() {
     newPassword: "",
     confirmPassword: "",
   });
+
+  const [addressData, setAddressData] = useState({
+    street: user?.address?.street || "",
+    city: user?.address?.city || "",
+    state: user?.address?.state || "",
+    zipCode: user?.address?.zipCode || "",
+    country: user?.address?.country || "",
+  });
+
+  // Update address data when user object changes
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        name: user.name || ""
+      }));
+      setAddressData({
+        street: user.address?.street || "",
+        city: user.address?.city || "",
+        state: user.address?.state || "",
+        zipCode: user.address?.zipCode || "",
+        country: user.address?.country || "",
+      });
+    }
+  }, [user]);
 
   if (!user) {
     navigate("/login");
@@ -56,7 +83,8 @@ export default function Profile() {
       }
 
       await api.put("/auth/profile", updateData);
-      setSuccess("Profile updated successfully");
+      await refreshUser();
+      toast.success("Profile updated successfully");
       setIsEditing(false);
       setFormData({
         ...formData,
@@ -64,11 +92,26 @@ export default function Profile() {
         newPassword: "",
         confirmPassword: "",
       });
-      
-      // Refresh page to update user data
-      setTimeout(() => window.location.reload(), 1500);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to update profile");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddressUpdate = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    setLoading(true);
+
+    try {
+      await api.put("/auth/profile", { address: addressData });
+      await refreshUser();
+      toast.success("Shipping address updated successfully");
+      setIsEditingAddress(false);
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to update address");
     } finally {
       setLoading(false);
     }
@@ -228,6 +271,164 @@ export default function Profile() {
                       currentPassword: "",
                       newPassword: "",
                       confirmPassword: "",
+                    });
+                    setError("");
+                  }}
+                  className="flex-1 border border-gray-200 text-gray-600 py-3 hover:border-gray-900 hover:text-gray-900 transition-colors text-sm font-light tracking-wide"
+                >
+                  CANCEL
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+
+        {/* Shipping Address Section */}
+        <div className="border border-gray-100 p-6 sm:p-8 mb-8">
+          <div className="flex justify-between items-start mb-6">
+            <h2 className="text-lg font-light text-gray-900">Shipping Address</h2>
+            {!isEditingAddress && (
+              <button
+                onClick={() => setIsEditingAddress(true)}
+                className="text-sm text-gray-600 hover:text-gray-900 font-light underline"
+              >
+                {user?.address?.street ? "Edit" : "Add"}
+              </button>
+            )}
+          </div>
+
+          {!isEditingAddress ? (
+            <div className="space-y-4">
+              {user?.address?.street ? (
+                <>
+                  <div>
+                    <label className="block text-xs text-gray-500 mb-1 font-light tracking-wide">
+                      STREET
+                    </label>
+                    <p className="text-sm text-gray-900 font-light">{user.address.street}</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs text-gray-500 mb-1 font-light tracking-wide">
+                        CITY
+                      </label>
+                      <p className="text-sm text-gray-900 font-light">{user.address.city}</p>
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-500 mb-1 font-light tracking-wide">
+                        STATE
+                      </label>
+                      <p className="text-sm text-gray-900 font-light">{user.address.state}</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs text-gray-500 mb-1 font-light tracking-wide">
+                        ZIP CODE
+                      </label>
+                      <p className="text-sm text-gray-900 font-light">{user.address.zipCode}</p>
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-500 mb-1 font-light tracking-wide">
+                        COUNTRY
+                      </label>
+                      <p className="text-sm text-gray-900 font-light">{user.address.country}</p>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <p className="text-sm text-gray-500 font-light">No shipping address saved</p>
+              )}
+            </div>
+          ) : (
+            <form onSubmit={handleAddressUpdate} className="space-y-6">
+              <div>
+                <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                  STREET ADDRESS
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={addressData.street}
+                  onChange={(e) => setAddressData({ ...addressData, street: e.target.value })}
+                  className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                  placeholder="Enter street address"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                    CITY
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={addressData.city}
+                    onChange={(e) => setAddressData({ ...addressData, city: e.target.value })}
+                    className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                    placeholder="City"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                    STATE
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={addressData.state}
+                    onChange={(e) => setAddressData({ ...addressData, state: e.target.value })}
+                    className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                    placeholder="State"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                    ZIP CODE
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={addressData.zipCode}
+                    onChange={(e) => setAddressData({ ...addressData, zipCode: e.target.value })}
+                    className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                    placeholder="Zip code"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                    COUNTRY
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={addressData.country}
+                    onChange={(e) => setAddressData({ ...addressData, country: e.target.value })}
+                    className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                    placeholder="Country"
+                  />
+                </div>
+              </div>
+              <div className="flex gap-4 pt-4">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="flex-1 bg-gray-900 text-white py-3 hover:bg-gray-800 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed text-sm font-light tracking-wide"
+                >
+                  {loading ? "SAVING..." : "SAVE ADDRESS"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsEditingAddress(false);
+                    setAddressData({
+                      street: user?.address?.street || "",
+                      city: user?.address?.city || "",
+                      state: user?.address?.state || "",
+                      zipCode: user?.address?.zipCode || "",
+                      country: user?.address?.country || "",
                     });
                     setError("");
                   }}

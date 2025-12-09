@@ -90,19 +90,19 @@ export default function Footer() {
             <h4 className="text-sm font-light mb-4 text-gray-900 tracking-wide">SUPPORT</h4>
             <ul className="space-y-3 text-sm text-gray-500 font-light">
               <li>
-                <Link to="/contact" className="hover:text-gray-900 transition-colors">
+                <a href="/contact" className="hover:text-gray-900 transition-colors">
                   Contact
+                </a>
+              </li>
+              <li>
+                <Link to="/" className="hover:text-gray-900 transition-colors">
+                  FAQ
                 </Link>
               </li>
               <li>
-                <a href="/" className="hover:text-gray-900 transition-colors">
-                  FAQ
-                </a>
-              </li>
-              <li>
-                <a href="/" className="hover:text-gray-900 transition-colors">
+                <Link to="/" className="hover:text-gray-900 transition-colors">
                   Shipping
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

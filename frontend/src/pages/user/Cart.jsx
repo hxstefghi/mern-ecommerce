@@ -139,7 +139,7 @@ export default function Cart() {
                 Clear Cart
               </button>
               <Link
-                to="/"
+                to="/products"
                 className="block text-center text-sm text-gray-500 hover:text-gray-900 mt-6 font-light"
               >
                 Continue Shopping

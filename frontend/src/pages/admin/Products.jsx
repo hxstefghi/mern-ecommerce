@@ -154,7 +154,7 @@ export default function AdminProducts() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-light">
                     <button
                       onClick={() => handleEdit(product)}
-                      className="text-blue-600 hover:text-blue-900 mr-4"
+                      className="text-green-500 hover:text-gray-700 mr-4"
                     >
                       Edit
                     </button>

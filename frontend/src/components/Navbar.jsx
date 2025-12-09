@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <nav className="border-b border-gray-100 sticky top-0 z-50 backdrop-blur-sm bg-white/90">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="relative flex justify-between items-center h-16 md:h-20">
           {/* Left: Logo */}
           <Link to="/" className="text-lg md:text-xl font-light tracking-wider text-gray-900 hover:text-gray-600 transition-colors z-10">

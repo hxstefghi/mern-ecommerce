@@ -45,7 +45,10 @@ export const getMe = async (req, res) => {
 };
 
 export const updateProfile = async (req, res) => {
-  const { name, currentPassword, newPassword } = req.body;
+  const { name, currentPassword, newPassword, address } = req.body;
+
+  console.log("Update Profile Request Body:", req.body);
+  console.log("Address received:", address);
 
   try {
     const user = await User.findById(req.userId);
@@ -53,9 +56,23 @@ export const updateProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    console.log("User before update:", user);
+
     // Update name
     if (name) {
       user.name = name;
+    }
+
+    // Update address if provided
+    if (address) {
+      user.address = {
+        street: address.street || "",
+        city: address.city || "",
+        state: address.state || "",
+        zipCode: address.zipCode || "",
+        country: address.country || ""
+      };
+      user.markModified('address');
     }
 
     // Update password if provided
@@ -73,9 +90,13 @@ export const updateProfile = async (req, res) => {
     }
 
     await user.save();
+    console.log("User after save:", user);
 
-    res.json({ message: "Profile updated successfully", user: { _id: user._id, name: user.name, email: user.email } });
+    const userResponse = await User.findById(user._id).select("-password");
+    
+    res.json({ message: "Profile updated successfully", user: userResponse });
   } catch (error) {
+    console.error("Error updating profile:", error);
     res.status(500).json({ message: "Error updating profile" });
   }
 };

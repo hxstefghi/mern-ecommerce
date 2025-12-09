@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import api from "../../lib/api";
 import Footer from "../../components/Footer";
 
 export default function Checkout() {
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
   const { cart, cartTotal, clearCart } = useCart();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -45,6 +46,31 @@ export default function Checkout() {
     setLoading(true);
 
     try {
+      let shippingAddress;
+      
+      // If user has saved address, use it
+      if (user?.address?.street) {
+        shippingAddress = user.address;
+      } else {
+        // If user doesn't have saved address, use form data and save it
+        shippingAddress = {
+          street: formData.street,
+          city: formData.city,
+          state: formData.state,
+          zipCode: formData.zipCode,
+          country: formData.country
+        };
+        
+        // Save address to user profile
+        try {
+          await api.put("/auth/profile", { address: shippingAddress });
+          await refreshUser();
+        } catch (err) {
+          console.error("Failed to save address:", err);
+          // Continue with order even if address save fails
+        }
+      }
+
       const orderData = {
         orderItems: cart.map(item => ({
           product: item._id,
@@ -53,13 +79,7 @@ export default function Checkout() {
           image: item.image,
           price: item.price
         })),
-        shippingAddress: {
-          street: formData.street,
-          city: formData.city,
-          state: formData.state,
-          zipCode: formData.zipCode,
-          country: formData.country
-        },
+        shippingAddress,
         paymentMethod: formData.paymentMethod,
         itemsPrice: cartTotal,
         shippingPrice,
@@ -69,10 +89,11 @@ export default function Checkout() {
 
       const { data } = await api.post("/orders", orderData);
       clearCart();
+      toast.success("Order placed successfully!");
       navigate(`/orders/${data._id}`);
     } catch (error) {
       console.error("Error creating order:", error);
-      alert("Failed to create order. Please try again.");
+      toast.error("Failed to create order. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -87,16 +108,36 @@ export default function Checkout() {
           <div className="lg:col-span-2">
             <form onSubmit={handleSubmit} className="space-y-8">
               <div>
-                <h2 className="text-2xl font-light mb-6">Shipping Information</h2>
-                <div className="space-y-4">
-                  <input
-                    type="text"
-                    placeholder="Street Address"
-                    value={formData.street}
-                    onChange={(e) => setFormData({ ...formData, street: e.target.value })}
-                    className="w-full px-4 py-3 border-b border-gray-300 focus:border-black outline-none font-light"
-                    required
-                  />
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-light">Shipping Information</h2>
+                  {user?.address?.street && (
+                    <Link
+                      to="/profile"
+                      className="text-sm font-light text-gray-600 hover:text-gray-900 underline"
+                    >
+                      Edit Address
+                    </Link>
+                  )}
+                </div>
+                
+                {user?.address?.street ? (
+                  <div className="p-6 bg-gray-50 border border-gray-200">
+                    <p className="text-sm font-light text-gray-900 mb-2">{user.address.street}</p>
+                    <p className="text-sm font-light text-gray-900 mb-2">
+                      {user.address.city}, {user.address.state} {user.address.zipCode}
+                    </p>
+                    <p className="text-sm font-light text-gray-900">{user.address.country}</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <input
+                      type="text"
+                      placeholder="Street Address"
+                      value={formData.street}
+                      onChange={(e) => setFormData({ ...formData, street: e.target.value })}
+                      className="w-full px-4 py-3 border-b border-gray-300 focus:border-black outline-none font-light"
+                      required
+                    />
                   <div className="grid grid-cols-2 gap-4">
                     <input
                       type="text"
@@ -133,7 +174,8 @@ export default function Checkout() {
                       required
                     />
                   </div>
-                </div>
+                  </div>
+                )}
               </div>
 
               <div>
