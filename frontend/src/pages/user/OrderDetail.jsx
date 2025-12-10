@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import api from "../../lib/api";
 import Footer from "../../components/Footer";
@@ -67,7 +67,10 @@ export default function OrderDetail() {
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex justify-between items-center mb-8">
+        <Link to="/my-orders" className="text-sm text-gray-500 hover:text-gray-900">
+          ← Back
+        </Link>
+        <div className="flex justify-between items-center my-8">
           <h1 className="text-4xl font-light">Order Details</h1>
           <span className={`px-4 py-2 text-sm font-light capitalize ${getStatusColor(order.status)}`}>
             {order.status}

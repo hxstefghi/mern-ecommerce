@@ -28,7 +28,7 @@ export default function Navbar() {
         <div className="relative flex justify-between items-center h-16 md:h-20">
           {/* Left: Logo */}
           <Link to="/" className="text-lg md:text-xl font-light tracking-wider text-gray-900 hover:text-gray-600 transition-colors z-10">
-            STORE
+            HXSTE
           </Link>
 
           {/* Center: Main Navigation (Desktop) - Absolutely positioned */}

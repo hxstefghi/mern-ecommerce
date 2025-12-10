@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
-            <h3 className="text-xl font-light tracking-wider mb-4 text-gray-900">STORE</h3>
+            <h3 className="text-xl font-light tracking-wider mb-4 text-gray-900">HXSTE</h3>
             <p className="text-sm text-gray-500 font-light leading-relaxed">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, aliquam!
             </p>
