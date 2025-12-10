@@ -37,8 +37,15 @@ export function AuthProvider({ children }) {
   };
 
   const logout = async () => {
+    // Do NOT clear server cart - preserve user's items for next login
     await api.post("/auth/logout");
     setUser(null);
+    // Clear local cart stored for anonymous sessions
+    try {
+      localStorage.removeItem("cart");
+    } catch {
+      // ignore
+    }
   };
 
   const refreshUser = async () => {

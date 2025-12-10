@@ -12,6 +12,13 @@ const userSchema = new mongoose.Schema({
     zipCode: String,
     country: String
   }
+  ,
+  cart: [
+    {
+      product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+      quantity: { type: Number, default: 1 }
+    }
+  ]
 }, { timestamps: true });
 
 export default mongoose.model("User", userSchema);
