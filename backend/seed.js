@@ -78,7 +78,25 @@ const products = [
     price: 24.99,
     image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&h=500&fit=crop",
     description: "Insulated stainless steel water bottle that keeps drinks cold for 24 hours."
-  }
+  },
+  {
+    name: "Gaming Mouse",
+    price: 69.99,
+    image: "https://images.unsplash.com/photo-1527814050087-3793815479db?w=500&h=500&fit=crop",
+    description: "High-precision gaming mouse with 16000 DPI and programmable buttons."
+  },
+  {
+    name: "Wireless Earbuds",
+    price: 119.99,
+    image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&h=500&fit=crop",
+    description: "True wireless earbuds with active noise cancellation and 24-hour battery life."
+  },
+  {
+    name: "Power Bank",
+    price: 45.99,
+    image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=500&h=500&fit=crop",
+    description: "20000mAh power bank with fast charging and dual USB ports."
+  },
 ];
 
 async function seedDatabase() {

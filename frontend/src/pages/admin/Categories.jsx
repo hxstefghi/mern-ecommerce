@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import AdminLayout from "../../components/AdminLayout";
 import api from "../../lib/api";
 
 export default function AdminCategories() {
@@ -93,21 +94,21 @@ export default function AdminCategories() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-light">Category Management</h1>
+    <AdminLayout>
+      <div className="p-4 sm:p-6 lg:p-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 sm:mb-8">
+          <h1 className="text-xl sm:text-2xl font-light text-gray-900">Category Management</h1>
           <button
             onClick={() => setShowModal(true)}
-            className="px-6 py-2 bg-black text-white font-light hover:bg-gray-800 transition-colors"
+            className="px-4 sm:px-6 py-2 bg-black text-white font-light hover:bg-gray-800 transition-colors text-sm sm:text-base"
           >
             Add Category
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {categories.map((category) => (
-            <div key={category._id} className="border border-gray-200 p-6">
+            <div key={category._id} className="border border-gray-200 p-4 sm:p-6 bg-white">
               <h3 className="text-xl font-light mb-2">{category.name}</h3>
               <p className="text-sm font-light text-gray-500 mb-4">{category.description}</p>
               <p className="text-xs font-light text-gray-400 mb-4">Slug: {category.slug}</p>
@@ -181,6 +182,6 @@ export default function AdminCategories() {
           </div>
         )}
       </div>
-    </div>
+    </AdminLayout>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import AdminLayout from "../../components/AdminLayout";
 import api from "../../lib/api";
 
 export default function AdminProducts() {
@@ -119,20 +120,20 @@ export default function AdminProducts() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-light">Product Management</h1>
+    <AdminLayout>
+      <div className="p-4 sm:p-6 lg:p-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 sm:mb-8">
+          <h1 className="text-xl sm:text-2xl font-light text-gray-900">Product Management</h1>
           <button
             onClick={() => setShowModal(true)}
-            className="px-6 py-2 cursor-pointer bg-black text-white font-light hover:bg-gray-800 transition-colors"
+            className="px-4 sm:px-6 py-2 cursor-pointer bg-black text-white font-light hover:bg-gray-800 transition-colors text-sm sm:text-base"
           >
             Add Product
           </button>
         </div>
 
-        <div className="border border-gray-200 overflow-hidden">
-          <table className="w-full">
+        <div className="border border-gray-200 overflow-x-auto bg-white">
+          <table className="w-full min-w-[600px]">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-light text-gray-500 uppercase tracking-wider">Image</th>
@@ -273,6 +274,6 @@ export default function AdminProducts() {
           </div>
         )}
       </div>
-    </div>
+    </AdminLayout>
   );
 }
