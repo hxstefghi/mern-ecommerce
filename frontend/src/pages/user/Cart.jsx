@@ -77,9 +77,24 @@ export default function Cart() {
                     >
                       -
                     </button>
-                    <span className="text-sm font-light">
-                      {item.quantity}
-                    </span>
+                    <input
+                      type="number"
+                      min="1"
+                      value={item.quantity}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value);
+                        if (!isNaN(val) && val >= 1) {
+                          updateQuantity(item._id, val);
+                        }
+                      }}
+                      onBlur={(e) => {
+                        // If empty or invalid on blur, reset to 1
+                        if (!e.target.value || parseInt(e.target.value) < 1) {
+                          updateQuantity(item._id, 1);
+                        }
+                      }}
+                      className="w-16 h-8 border border-gray-200 text-center text-sm font-light focus:outline-none focus:border-gray-900"
+                    />
                     <button
                       onClick={() =>
                         updateQuantity(item._id, item.quantity + 1)

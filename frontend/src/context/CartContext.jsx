@@ -103,9 +103,9 @@ export function CartProvider({ children }) {
   };
 
   const updateQuantity = (productId, quantity) => {
-    if (quantity <= 0) {
-      removeFromCart(productId);
-      return;
+    // Minimum quantity is 1 (don't delete on minus)
+    if (quantity < 1) {
+      quantity = 1;
     }
     setCart((prevCart) => {
       const newCart = prevCart.map((item) =>

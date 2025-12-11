@@ -125,7 +125,7 @@ export default function AdminProducts() {
           <h1 className="text-4xl font-light">Product Management</h1>
           <button
             onClick={() => setShowModal(true)}
-            className="px-6 py-2 bg-black text-white font-light hover:bg-gray-800 transition-colors"
+            className="px-6 py-2 cursor-pointer bg-black text-white font-light hover:bg-gray-800 transition-colors"
           >
             Add Product
           </button>
@@ -154,13 +154,13 @@ export default function AdminProducts() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-light">
                     <button
                       onClick={() => handleEdit(product)}
-                      className="text-green-500 hover:text-gray-700 mr-4"
+                      className="cursor-pointer text-green-500 hover:text-gray-700 mr-4"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(product._id)}
-                      className="text-red-600 hover:text-red-900"
+                      className="cursor-pointer text-red-600 hover:text-red-900"
                     >
                       Delete
                     </button>
