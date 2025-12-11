@@ -10,6 +10,7 @@ export default function Products() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Filter states
+  const [searchQuery, setSearchQuery] = useState("");
   const [priceRange, setPriceRange] = useState([0, 500]);
   const [sortBy, setSortBy] = useState("default");
 
@@ -31,6 +32,14 @@ export default function Products() {
   useEffect(() => {
     let filtered = [...products];
 
+    // Search filter
+    if (searchQuery.trim()) {
+      filtered = filtered.filter((p) =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.description?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
     // Price filter
     filtered = filtered.filter(
       (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
@@ -46,9 +55,10 @@ export default function Products() {
     }
 
     setFilteredProducts(filtered);
-  }, [priceRange, sortBy, products]);
+  }, [searchQuery, priceRange, sortBy, products]);
 
   const resetFilters = () => {
+    setSearchQuery("");
     setPriceRange([0, 500]);
     setSortBy("default");
   };
@@ -78,6 +88,32 @@ export default function Products() {
             {/* Sidebar - Desktop */}
             <aside className="hidden lg:block w-64 shrink-0">
               <div className="sticky top-24">
+                {/* Search Bar */}
+                <div className="mb-8">
+                  <h3 className="text-sm font-light mb-4 text-gray-900 tracking-wide">
+                    SEARCH
+                  </h3>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search products..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full border border-gray-200 px-3 py-2 text-sm font-light focus:outline-none focus:border-gray-900 bg-white"
+                    />
+                    {searchQuery && (
+                      <button
+                        onClick={() => setSearchQuery("")}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-900"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                </div>
+
                 <div className="mb-8">
                   <h3 className="text-sm font-light mb-4 text-gray-900 tracking-wide">
                     SORT BY
@@ -143,6 +179,32 @@ export default function Products() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     </button>
+                  </div>
+
+                  {/* Search Bar - Mobile */}
+                  <div className="mb-8">
+                    <h3 className="text-sm font-light mb-4 text-gray-900 tracking-wide">
+                      SEARCH
+                    </h3>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Search products..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full border border-gray-200 px-3 py-2 text-sm font-light focus:outline-none focus:border-gray-900 bg-white"
+                      />
+                      {searchQuery && (
+                        <button
+                          onClick={() => setSearchQuery("")}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-900"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
                   </div>
 
                   <div className="mb-8">
