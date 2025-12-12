@@ -17,54 +17,34 @@ A full-stack e-commerce application with advanced features, built with MongoDB, 
 ![Categories](screenshots/admin/categories.png)
 ![Coupons](screenshots/admin/coupons.png)
 
-To add screenshots to this README, follow these steps:
-
-1. Create a `screenshots` folder in the root directory:
-```bash
-mkdir screenshots
-```
-
-2. Add your images to the folder (e.g., `home.png`, `admin-dashboard.png`, etc.)
-
-3. Reference images in Markdown using:
-```markdown
-![Homepage](screenshots/home.png)
-![Admin Dashboard](screenshots/admin-dashboard.png)
-```
-
-Or use HTML for more control:
-```html
-<img src="screenshots/home.png" alt="Homepage" width="600">
-```
-
-## ✨ Features
+## Features
 
 ### User Features
-- 🎨 Modern, minimalist UI with Tailwind CSS v4
-- 🛍️ Product browsing with search and filtering
-- 🛒 Smart shopping cart with quantity controls and persistence
-- 👤 User authentication (register/login with JWT)
-- 💳 Checkout process with address management
-- ⭐ Product reviews and ratings system
-- 📦 Order tracking and history
-- 🔍 Product search functionality
-- 📱 Fully responsive design (mobile, tablet, desktop)
-- 💾 Cart merge on login (preserves cart from logged-out session)
+- Modern, minimalist UI with Tailwind CSS v4
+- Product browsing with search and filtering
+- Smart shopping cart with quantity controls and persistence
+- User authentication (register/login with JWT)
+- Checkout process with address management
+- Product reviews and ratings system
+- Order tracking and history
+- Product search functionality
+- Fully responsive design (mobile, tablet, desktop)
+- Cart merge on login (preserves cart from logged-out session)
 
 ### Admin Features
-- 📊 Comprehensive admin dashboard with analytics
-- 📈 Daily sales chart (last 7 days)
-- 🏆 Top selling products table
-- 📦 Order management with status filtering
-- 👥 User management (view, edit, delete users)
-- 🛍️ Product management (CRUD operations)
-- 🏷️ Category management
-- 🎟️ Coupon system with percentage discounts and expiration dates
-- 🗑️ Review moderation (admin can delete abusive reviews)
-- 📊 Real-time metrics (revenue, orders, users, products)
-- 🔍 Order status filters (all, pending, processing, shipped, delivered, cancelled)
+- Comprehensive admin dashboard with analytics
+- Daily sales chart (last 7 days)
+- Top selling products table
+- Order management with status filtering
+- User management (view, edit, delete users)
+- Product management (CRUD operations)
+- Category management
+- Coupon system with percentage discounts and expiration dates
+- Review moderation (admin can delete abusive reviews)
+- Real-time metrics (revenue, orders, users, products)
+- Order status filters (all, pending, processing, shipped, delivered, cancelled)
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - React 19
@@ -87,122 +67,6 @@ Or use HTML for more control:
 ### Prerequisites
 - Node.js (v18 or higher)
 - MongoDB (local or Atlas)
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone <your-repo-url>
-cd mern-ecommerce
-```
-
-2. Install backend dependencies:
-```bash
-cd backend
-npm install
-```
-
-3. Install frontend dependencies:
-```bash
-cd ../frontend
-npm install
-```
-
-4. Create a `.env` file in the backend folder:
-```env
-MONGO_URI=mongodb://localhost:27017/ecommerce
-JWT_SECRET=your_jwt_secret_key_here
-PORT=5000
-```
-
-5. Seed the database with sample products:
-```bash
-cd backend
-npm run seed
-```
-
-6. Start the backend server:
-```bash
-npm run dev
-```
-
-7. In a new terminal, start the frontend:
-```bash
-cd frontend
-npm run dev
-```
-
-8. Open your browser and navigate to `http://localhost:5173`
-
-## 📁 Project Structure
-
-```
-mern-ecommerce/
-├── backend/
-│   ├── config/
-│   │   └── db.js                     # MongoDB connection
-│   ├── controllers/
-│   │   ├── admin.controller.js       # Admin analytics & operations
-│   │   ├── auth.controller.js        # Authentication logic
-│   │   ├── category.controller.js    # Category CRUD
-│   │   ├── coupon.controller.js      # Coupon management & validation
-│   │   ├── order.controller.js       # Order processing
-│   │   ├── product.controller.js     # Product CRUD & reviews
-│   │   └── user.controller.js        # User management
-│   ├── middleware/
-│   │   ├── authMiddleware.js         # JWT verification
-│   │   ├── adminMiddleware.js        # Admin role check
-│   │   └── errorMiddleware.js        # Error handling
-│   ├── models/
-│   │   ├── Category.js               # Category schema
-│   │   ├── Coupon.js                 # Coupon schema with expiration
-│   │   ├── Order.js                  # Order schema with status
-│   │   ├── Product.js                # Product schema with reviews
-│   │   └── User.js                   # User schema with roles
-│   ├── routes/
-│   │   ├── admin.routes.js           # Admin endpoints
-│   │   ├── auth.routes.js            # Auth endpoints
-│   │   ├── category.routes.js        # Category endpoints
-│   │   ├── coupon.routes.js          # Coupon endpoints
-│   │   ├── order.routes.js           # Order endpoints
-│   │   ├── product.routes.js         # Product endpoints
-│   │   └── user.routes.js            # User endpoints
-│   ├── utils/
-│   │   └── generateToken.js          # JWT token generation
-│   ├── app.js                        # Express app setup
-│   ├── server.js                     # Server entry point
-│   └── seed.js                       # Database seeding
-│
-└── frontend/
-    ├── src/
-    │   ├── components/
-    │   │   ├── AdminLayout.jsx       # Admin sidebar layout
-    │   │   ├── Navbar.jsx            # Main navigation
-    │   │   └── ProductCard.jsx       # Product display card with ratings
-    │   ├── context/
-    │   │   ├── AuthContext.jsx       # Authentication state
-    │   │   └── CartContext.jsx       # Shopping cart state
-    │   ├── lib/
-    │   │   └── api.js                # Axios instance
-    │   ├── pages/
-    │   │   ├── admin/
-    │   │   │   ├── Categories.jsx    # Category management
-    │   │   │   ├── Coupons.jsx       # Coupon management
-    │   │   │   ├── Dashboard.jsx     # Analytics dashboard
-    │   │   │   ├── Orders.jsx        # Order management with filtering
-    │   │   │   ├── Products.jsx      # Product management
-    │   │   │   └── Users.jsx         # User management
-    │   │   ├── Cart.jsx              # Shopping cart
-    │   │   ├── Checkout.jsx          # Checkout with coupon apply
-    │   │   ├── Home.jsx              # Homepage
-    │   │   ├── Login.jsx             # Login page
-    │   │   ├── Orders.jsx            # User orders history
-    │   │   ├── ProductDetail.jsx     # Product details with reviews
-    │   │   └── Register.jsx          # Registration page
-    │   ├── App.jsx                   # Route configuration
-    │   └── main.jsx                  # React entry point
-    └── package.json
-```
 
 ## API Endpoints
 
@@ -251,7 +115,7 @@ mern-ecommerce/
 - `DELETE /api/admin/products/:id` - Delete product (admin)
 - `DELETE /api/admin/users/:id` - Delete user (admin)
 
-## 💡 Key Features Explained
+## Key Features Explained
 
 ### Product Reviews & Ratings
 - Users can leave reviews with 1-5 star ratings
@@ -293,7 +157,7 @@ mern-ecommerce/
 - Admin-only routes (role-based access control)
 - Input validation and sanitization
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 - [ ] Payment integration (Stripe/PayPal)
 - [ ] Wishlist functionality
@@ -307,7 +171,7 @@ mern-ecommerce/
 - [ ] Product recommendations
 - [ ] Dark mode theme toggle
 
-## 📝 License
+## License
 
 MIT
 
