@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import AdminLayout from "../../components/AdminLayout";
 import api from "../../lib/api";
-import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 export default function AdminDashboard() {
   const { user, authLoading } = useAuth();
@@ -118,6 +118,115 @@ export default function AdminDashboard() {
                     <p className="text-lg sm:text-2xl font-light text-green-600">
                       {analytics.deliveredOrders}
                     </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Daily Sales Chart */}
+              <div className="mb-6 sm:mb-8">
+                <h3 className="text-xs font-light text-gray-500 uppercase tracking-wide mb-4">
+                  Daily Sales (Last 7 Days)
+                </h3>
+                <div className="bg-white border border-gray-200 p-4 sm:p-6">
+                  <ResponsiveContainer width="100%" height={300}>
+                    <LineChart data={analytics.dailySales}>
+                      <CartesianGrid
+                        strokeDasharray="3 3"
+                        stroke="#f3f4f6"
+                        vertical={false}
+                      />
+                      <XAxis
+                        dataKey="_id"
+                        tick={{ fontSize: 11, fill: "#9ca3af" }}
+                        axisLine={false}
+                        tickLine={false}
+                      />
+                      <YAxis
+                        tick={{ fontSize: 11, fill: "#9ca3af" }}
+                        axisLine={false}
+                        tickLine={false}
+                      />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: "white",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: 0,
+                          fontSize: 11,
+                          fontWeight: 300,
+                        }}
+                      />
+                      <Legend
+                        wrapperStyle={{
+                          fontSize: 11,
+                          fontWeight: 300,
+                        }}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="sales"
+                        stroke="#111827"
+                        strokeWidth={2}
+                        dot={{ fill: "#111827", r: 4 }}
+                        name="Sales ($)"
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="orders"
+                        stroke="#9ca3af"
+                        strokeWidth={2}
+                        dot={{ fill: "#9ca3af", r: 4 }}
+                        name="Orders"
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              {/* Top Selling Products */}
+              <div className="mb-6 sm:mb-8">
+                <h3 className="text-xs font-light text-gray-500 uppercase tracking-wide mb-4">
+                  Top Selling Products
+                </h3>
+                <div className="bg-white border border-gray-200 overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[600px]">
+                      <thead className="border-b border-gray-200">
+                        <tr>
+                          <th className="text-left py-3 px-4 sm:px-6 text-xs font-light text-gray-500 uppercase tracking-wide">
+                            Product
+                          </th>
+                          <th className="text-right py-3 px-4 sm:px-6 text-xs font-light text-gray-500 uppercase tracking-wide">
+                            Units Sold
+                          </th>
+                          <th className="text-right py-3 px-4 sm:px-6 text-xs font-light text-gray-500 uppercase tracking-wide">
+                            Revenue
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {analytics.topProducts && analytics.topProducts.length > 0 ? (
+                          analytics.topProducts.map((product, index) => (
+                            <tr key={index} className="border-b border-gray-200 last:border-b-0">
+                              <td className="py-3 px-4 sm:px-6 text-sm font-light text-gray-900">
+                                {product.name}
+                              </td>
+                              <td className="py-3 px-4 sm:px-6 text-sm font-light text-gray-900 text-right">
+                                {product.totalSold}
+                              </td>
+                              <td className="py-3 px-4 sm:px-6 text-sm font-light text-gray-900 text-right">
+                                ${product.revenue.toFixed(2)}
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan="3" className="py-6 px-4 sm:px-6 text-center text-sm font-light text-gray-400">
+                              No sales data available
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>

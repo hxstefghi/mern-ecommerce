@@ -117,7 +117,9 @@ export const deleteProduct = async (req, res) => {
 // Order Management
 export const getAllOrders = async (req, res) => {
   try {
-    const orders = await Order.find().populate("user", "name email").sort({ createdAt: -1 });
+    const { status } = req.query;
+    const filter = status ? { status } : {};
+    const orders = await Order.find(filter).populate("user", "name email").sort({ createdAt: -1 });
     res.json(orders);
   } catch (error) {
     res.status(500).json({ message: "Error fetching orders" });
@@ -212,13 +214,51 @@ export const getAnalytics = async (req, res) => {
     const pendingOrders = await Order.countDocuments({ status: "pending" });
     const deliveredOrders = await Order.countDocuments({ status: "delivered" });
 
+    // Daily sales for the last 7 days
+    const dailySales = await Order.aggregate([
+      {
+        $match: {
+          createdAt: {
+            $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+          }
+        }
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          sales: { $sum: "$totalPrice" },
+          orders: { $sum: 1 }
+        }
+      },
+      {
+        $sort: { _id: 1 }
+      }
+    ]);
+
+    // Top selling products
+    const topProducts = await Order.aggregate([
+      { $unwind: "$orderItems" },
+      {
+        $group: {
+          _id: "$orderItems.product",
+          name: { $first: "$orderItems.name" },
+          totalSold: { $sum: "$orderItems.quantity" },
+          revenue: { $sum: { $multiply: ["$orderItems.quantity", "$orderItems.price"] } }
+        }
+      },
+      { $sort: { totalSold: -1 } },
+      { $limit: 5 }
+    ]);
+
     res.json({
       totalUsers,
       totalProducts,
       totalOrders,
       totalRevenue,
       pendingOrders,
-      deliveredOrders
+      deliveredOrders,
+      dailySales,
+      topProducts
     });
   } catch (error) {
     res.status(500).json({ message: "Error fetching analytics" });

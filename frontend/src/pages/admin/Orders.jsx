@@ -9,6 +9,7 @@ export default function AdminOrders() {
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
     if (!authLoading && (!user || user.role !== "admin")) {
@@ -18,11 +19,15 @@ export default function AdminOrders() {
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [statusFilter]);
 
   const fetchOrders = async () => {
     try {
-      const { data } = await api.get("/admin/orders");
+      setLoading(true);
+      const url = statusFilter === "all" 
+        ? "/admin/orders" 
+        : `/admin/orders?status=${statusFilter}`;
+      const { data } = await api.get(url);
       setOrders(data);
     } catch (error) {
       console.error("Error fetching orders:", error);
@@ -66,7 +71,73 @@ export default function AdminOrders() {
   return (
     <AdminLayout>
       <div className="p-4 sm:p-6 lg:p-8">
-        <h1 className="text-xl sm:text-2xl font-light text-gray-900 mb-6 sm:mb-8">Order Management</h1>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
+          <h1 className="text-xl sm:text-2xl font-light text-gray-900">Order Management</h1>
+          
+          {/* Status Filter */}
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setStatusFilter("all")}
+              className={`px-4 py-2 text-xs font-light tracking-wide transition-colors ${
+                statusFilter === "all"
+                  ? "bg-gray-900 text-white"
+                  : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+              }`}
+            >
+              ALL
+            </button>
+            <button
+              onClick={() => setStatusFilter("pending")}
+              className={`px-4 py-2 text-xs font-light tracking-wide transition-colors ${
+                statusFilter === "pending"
+                  ? "bg-yellow-600 text-white"
+                  : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+              }`}
+            >
+              PENDING
+            </button>
+            <button
+              onClick={() => setStatusFilter("processing")}
+              className={`px-4 py-2 text-xs font-light tracking-wide transition-colors ${
+                statusFilter === "processing"
+                  ? "bg-blue-600 text-white"
+                  : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+              }`}
+            >
+              PROCESSING
+            </button>
+            <button
+              onClick={() => setStatusFilter("shipped")}
+              className={`px-4 py-2 text-xs font-light tracking-wide transition-colors ${
+                statusFilter === "shipped"
+                  ? "bg-purple-600 text-white"
+                  : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+              }`}
+            >
+              SHIPPED
+            </button>
+            <button
+              onClick={() => setStatusFilter("delivered")}
+              className={`px-4 py-2 text-xs font-light tracking-wide transition-colors ${
+                statusFilter === "delivered"
+                  ? "bg-green-600 text-white"
+                  : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+              }`}
+            >
+              DELIVERED
+            </button>
+            <button
+              onClick={() => setStatusFilter("cancelled")}
+              className={`px-4 py-2 text-xs font-light tracking-wide transition-colors ${
+                statusFilter === "cancelled"
+                  ? "bg-red-600 text-white"
+                  : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+              }`}
+            >
+              CANCELLED
+            </button>
+          </div>
+        </div>
 
         <div className="space-y-3 sm:space-y-4">
           {orders.map((order) => (
