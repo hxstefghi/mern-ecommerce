@@ -34,9 +34,18 @@ export default function ProductCard({ product }) {
         <h2 className="text-sm text-gray-900 font-light line-clamp-1">
           {product.name}
         </h2>
-        <p className="text-sm text-gray-500 font-light">
-          P{product.price.toFixed(2)}
-        </p>
+        <div className="flex items-center gap-2">
+          <p className="text-sm text-gray-500 font-light">
+            P{product.price.toFixed(2)}
+          </p>
+          {product.numReviews > 0 && (
+            <div className="flex items-center gap-1 text-xs">
+              <span className="text-yellow-500">★</span>
+              <span className="text-gray-500 font-light">{product.rating.toFixed(1)}</span>
+              <span className="text-gray-400 font-light">({product.numReviews})</span>
+            </div>
+          )}
+        </div>
       </div>
     </Link>
   );
