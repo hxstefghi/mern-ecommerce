@@ -78,7 +78,7 @@ export default function AdminOrders() {
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setStatusFilter("all")}
-              className={`px-4 py-2 text-xs font-light tracking-wide transition-colors ${
+              className={`cursor-pointer px-4 py-2 text-xs font-light tracking-wide transition-colors ${
                 statusFilter === "all"
                   ? "bg-gray-900 text-white"
                   : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
@@ -88,7 +88,7 @@ export default function AdminOrders() {
             </button>
             <button
               onClick={() => setStatusFilter("pending")}
-              className={`px-4 py-2 text-xs font-light tracking-wide transition-colors ${
+              className={`cursor-pointer px-4 py-2 text-xs font-light tracking-wide transition-colors ${
                 statusFilter === "pending"
                   ? "bg-yellow-600 text-white"
                   : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
@@ -98,7 +98,7 @@ export default function AdminOrders() {
             </button>
             <button
               onClick={() => setStatusFilter("processing")}
-              className={`px-4 py-2 text-xs font-light tracking-wide transition-colors ${
+              className={`cursor-pointer px-4 py-2 text-xs font-light tracking-wide transition-colors ${
                 statusFilter === "processing"
                   ? "bg-blue-600 text-white"
                   : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
@@ -108,7 +108,7 @@ export default function AdminOrders() {
             </button>
             <button
               onClick={() => setStatusFilter("shipped")}
-              className={`px-4 py-2 text-xs font-light tracking-wide transition-colors ${
+              className={`cursor-pointer px-4 py-2 text-xs font-light tracking-wide transition-colors ${
                 statusFilter === "shipped"
                   ? "bg-purple-600 text-white"
                   : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
@@ -118,7 +118,7 @@ export default function AdminOrders() {
             </button>
             <button
               onClick={() => setStatusFilter("delivered")}
-              className={`px-4 py-2 text-xs font-light tracking-wide transition-colors ${
+              className={`cursor-pointer px-4 py-2 text-xs font-light tracking-wide transition-colors ${
                 statusFilter === "delivered"
                   ? "bg-green-600 text-white"
                   : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
@@ -128,7 +128,7 @@ export default function AdminOrders() {
             </button>
             <button
               onClick={() => setStatusFilter("cancelled")}
-              className={`px-4 py-2 text-xs font-light tracking-wide transition-colors ${
+              className={`cursor-pointer px-4 py-2 text-xs font-light tracking-wide transition-colors ${
                 statusFilter === "cancelled"
                   ? "bg-red-600 text-white"
                   : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"

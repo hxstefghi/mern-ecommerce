@@ -142,7 +142,7 @@ export default function AdminUsers() {
         </div>
 
         {showModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-8 max-w-md w-full mx-4">
               <h2 className="text-2xl font-light mb-6">Edit User</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
