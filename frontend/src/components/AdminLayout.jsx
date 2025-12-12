@@ -94,7 +94,7 @@ export default function AdminLayout({ children }) {
 
       {/* Sidebar - Desktop & Mobile */}
       <aside className={`
-        fixed lg:static top-14 lg:top-0 inset-y-0 left-0 z-50
+        fixed top-14 lg:top-0 left-0 h-screen lg:h-screen z-50
         w-64 bg-white border-r border-gray-200 flex flex-col
         transform transition-transform duration-200 ease-in-out
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
@@ -158,7 +158,7 @@ export default function AdminLayout({ children }) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto pt-16 lg:pt-0">
+      <main className="flex-1 overflow-auto pt-16 lg:pt-0 lg:ml-64">
         {children}
       </main>
     </div>

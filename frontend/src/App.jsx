@@ -45,20 +45,19 @@ export default function App() {
               },
             }}
           />
-          <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/my-orders" element={<MyOrders />} />
-            <Route path="/orders/:id" element={<OrderDetail />} />
+            <Route path="/" element={<><Navbar /><Home /></>} />
+            <Route path="/products" element={<><Navbar /><Products /></>} />
+            <Route path="/about" element={<><Navbar /><About /></>} />
+            <Route path="/contact" element={<><Navbar /><Contact /></>} />
+            <Route path="/login" element={<><Navbar /><Login /></>} />
+            <Route path="/register" element={<><Navbar /><Register /></>} />
+            <Route path="/cart" element={<><Navbar /><Cart /></>} />
+            <Route path="/product/:id" element={<><Navbar /><ProductDetail /></>} />
+            <Route path="/profile" element={<><Navbar /><Profile /></>} />
+            <Route path="/checkout" element={<><Navbar /><Checkout /></>} />
+            <Route path="/my-orders" element={<><Navbar /><MyOrders /></>} />
+            <Route path="/orders/:id" element={<><Navbar /><OrderDetail /></>} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/products" element={<AdminProducts />} />
             <Route path="/admin/orders" element={<AdminOrders />} />
