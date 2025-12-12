@@ -24,6 +24,7 @@ import AdminProducts from "./pages/admin/Products";
 import AdminOrders from "./pages/admin/Orders";
 import AdminUsers from "./pages/admin/Users";
 import AdminCategories from "./pages/admin/Categories";
+import AdminCoupons from "./pages/admin/Coupons";
 
 export default function App() {
   return (
@@ -63,6 +64,7 @@ export default function App() {
             <Route path="/admin/orders" element={<AdminOrders />} />
             <Route path="/admin/users" element={<AdminUsers />} />
             <Route path="/admin/categories" element={<AdminCategories />} />
+            <Route path="/admin/coupons" element={<AdminCoupons />} />
           </Routes>
         </CartProvider>
       </AuthProvider>

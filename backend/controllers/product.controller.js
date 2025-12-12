@@ -51,3 +51,36 @@ export const addReview = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const deleteReview = async (req, res) => {
+  try {
+    const { productId, reviewId } = req.params;
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const reviewIndex = product.reviews.findIndex(
+      (review) => review._id.toString() === reviewId
+    );
+
+    if (reviewIndex === -1) {
+      return res.status(404).json({ message: "Review not found" });
+    }
+
+    product.reviews.splice(reviewIndex, 1);
+    product.numReviews = product.reviews.length;
+    
+    if (product.reviews.length > 0) {
+      product.rating = product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.reviews.length;
+    } else {
+      product.rating = 0;
+    }
+
+    await product.save();
+    res.json({ message: "Review deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

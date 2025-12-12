@@ -231,22 +231,42 @@ export default function ProductDetail() {
               {product.reviews.map((review, index) => (
                 <div key={index} className="border-b border-gray-200 pb-8 last:border-b-0">
                   <div className="flex items-start justify-between mb-3">
-                    <div>
+                    <div className="flex-1">
                       <span className="text-sm font-light">{review.name}</span>
                       <div className="text-yellow-500 text-sm mt-1">
                         {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
                       </div>
                     </div>
-                    <span className="text-xs text-gray-400 font-light">
-                      {new Date(review.createdAt).toLocaleString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric',
-                        hour: 'numeric',
-                        minute: '2-digit',
-                        hour12: true
-                      })}
-                    </span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs text-gray-400 font-light">
+                        {new Date(review.createdAt).toLocaleString('en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric',
+                          hour: 'numeric',
+                          minute: '2-digit',
+                          hour12: true
+                        })}
+                      </span>
+                      {user?.role === 'admin' && (
+                        <button
+                          onClick={async () => {
+                            if (confirm('Are you sure you want to delete this review?')) {
+                              try {
+                                await api.delete(`/products/${product._id}/reviews/${review._id}`);
+                                toast.success('Review deleted successfully');
+                                fetchProduct();
+                              } catch (error) {
+                                toast.error('Failed to delete review');
+                              }
+                            }
+                          }}
+                          className="text-xs text-red-500 hover:text-red-700 font-light"
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
                   </div>
                   <p className="text-sm text-gray-600 font-light leading-relaxed">{review.comment}</p>
                 </div>

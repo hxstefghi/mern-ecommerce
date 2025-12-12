@@ -11,6 +11,9 @@ export default function Checkout() {
   const { cart, cartTotal, clearCart } = useCart();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [couponCode, setCouponCode] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
+  const [applyingCoupon, setApplyingCoupon] = useState(false);
   const [formData, setFormData] = useState({
     street: "",
     city: "",
@@ -38,8 +41,35 @@ export default function Checkout() {
   }
 
   const shippingPrice = 10;
-  const taxPrice = cartTotal * 0.1;
-  const totalPrice = cartTotal + shippingPrice + taxPrice;
+  const discountAmount = appliedCoupon ? (cartTotal * appliedCoupon.discount) / 100 : 0;
+  const subtotalAfterDiscount = cartTotal - discountAmount;
+  const taxPrice = subtotalAfterDiscount * 0.1;
+  const totalPrice = subtotalAfterDiscount + shippingPrice + taxPrice;
+
+  const handleApplyCoupon = async () => {
+    if (!couponCode.trim()) {
+      toast.error('Please enter a coupon code');
+      return;
+    }
+
+    try {
+      setApplyingCoupon(true);
+      const { data } = await api.post('/coupons/validate', { code: couponCode });
+      setAppliedCoupon(data);
+      toast.success(`Coupon applied! ${data.discount}% discount`);
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Invalid coupon code');
+      setAppliedCoupon(null);
+    } finally {
+      setApplyingCoupon(false);
+    }
+  };
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponCode('');
+    toast.success('Coupon removed');
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,7 +114,11 @@ export default function Checkout() {
         itemsPrice: cartTotal,
         shippingPrice,
         taxPrice,
-        totalPrice
+        totalPrice,
+        ...(appliedCoupon && {
+          coupon: appliedCoupon.code,
+          discount: discountAmount
+        })
       };
 
       const { data } = await api.post("/orders", orderData);
@@ -213,22 +247,69 @@ export default function Checkout() {
                   </div>
                 ))}
               </div>
-              <div className="border-t border-gray-200 pt-4 space-y-2">
-                <div className="flex justify-between font-light text-sm">
-                  <span>Subtotal</span>
-                  <span>${cartTotal.toFixed(2)}</span>
+              <div className="border-t border-gray-200 pt-4 space-y-4">
+                {/* Coupon Code Section */}
+                <div className="space-y-2">
+                  <label className="block text-xs text-gray-500 font-light tracking-wide">COUPON CODE</label>
+                  {appliedCoupon ? (
+                    <div className="flex items-center justify-between p-3 bg-green-50 border border-green-200">
+                      <div>
+                        <p className="text-sm font-light text-green-800">{appliedCoupon.code}</p>
+                        <p className="text-xs text-green-600">{appliedCoupon.discount}% discount applied</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleRemoveCoupon}
+                        className="text-xs text-red-500 hover:text-red-700 font-light"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={couponCode}
+                        onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                        placeholder="Enter code"
+                        className="flex-1 px-3 py-2 border border-gray-300 font-light text-sm focus:outline-none focus:border-gray-400"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleApplyCoupon}
+                        disabled={applyingCoupon}
+                        className="px-4 py-2 bg-gray-900 text-white font-light text-sm hover:bg-gray-800 disabled:bg-gray-400"
+                      >
+                        {applyingCoupon ? 'Checking...' : 'Apply'}
+                      </button>
+                    </div>
+                  )}
                 </div>
-                <div className="flex justify-between font-light text-sm">
-                  <span>Shipping</span>
-                  <span>${shippingPrice.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between font-light text-sm">
-                  <span>Tax (10%)</span>
-                  <span>${taxPrice.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between font-light text-lg pt-4 border-t border-gray-200">
-                  <span>Total</span>
-                  <span>${totalPrice.toFixed(2)}</span>
+
+                {/* Price Breakdown */}
+                <div className="space-y-2 pt-2">
+                  <div className="flex justify-between font-light text-sm">
+                    <span>Subtotal</span>
+                    <span>${cartTotal.toFixed(2)}</span>
+                  </div>
+                  {appliedCoupon && (
+                    <div className="flex justify-between font-light text-sm text-green-600">
+                      <span>Discount ({appliedCoupon.discount}%)</span>
+                      <span>-${discountAmount.toFixed(2)}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between font-light text-sm">
+                    <span>Shipping</span>
+                    <span>${shippingPrice.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between font-light text-sm">
+                    <span>Tax (10%)</span>
+                    <span>${taxPrice.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between font-light text-lg pt-4 border-t border-gray-200">
+                    <span>Total</span>
+                    <span>${totalPrice.toFixed(2)}</span>
+                  </div>
                 </div>
               </div>
             </div>
