@@ -1,8 +1,28 @@
 import Product from "../models/Product.js";
 
 export const getProducts = async (req, res) => {
-  const products = await Product.find();
-  res.json(products);
+  try {
+    const { category, search } = req.query;
+    let query = {};
+
+    // Filter by category if provided
+    if (category) {
+      query.category = category;
+    }
+
+    // Search by name or description if provided
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } }
+      ];
+    }
+
+    const products = await Product.find(query).populate('category', 'name');
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 export const getProductById = async (req, res) => {

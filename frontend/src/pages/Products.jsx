@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import api from "../lib/api";
 import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Filter states
   const [searchQuery, setSearchQuery] = useState("");
   const [priceRange, setPriceRange] = useState([0, 500]);
+  const [selectedRating, setSelectedRating] = useState('all');
   const [sortBy, setSortBy] = useState("default");
 
   useEffect(() => {
@@ -19,7 +19,6 @@ export default function Products() {
       try {
         const res = await api.get("/products");
         setProducts(res.data);
-        setFilteredProducts(res.data);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -29,7 +28,7 @@ export default function Products() {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
+  const filteredProducts = useMemo(() => {
     let filtered = [...products];
 
     // Search filter
@@ -45,6 +44,11 @@ export default function Products() {
       (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
     );
 
+    // Rating filter
+    if (selectedRating !== 'all') {
+      filtered = filtered.filter((p) => p.rating >= selectedRating);
+    }
+
     // Sort
     if (sortBy === "price-low") {
       filtered.sort((a, b) => a.price - b.price);
@@ -54,12 +58,13 @@ export default function Products() {
       filtered.sort((a, b) => a.name.localeCompare(b.name));
     }
 
-    setFilteredProducts(filtered);
-  }, [searchQuery, priceRange, sortBy, products]);
+    return filtered;
+  }, [searchQuery, priceRange, selectedRating, sortBy, products]);
 
   const resetFilters = () => {
     setSearchQuery("");
     setPriceRange([0, 500]);
+    setSelectedRating('all');
     setSortBy("default");
   };
 
@@ -153,6 +158,24 @@ export default function Products() {
                   </div>
                 </div>
 
+                <div className="mb-8">
+                  <h3 className="text-sm font-light mb-4 text-gray-900 tracking-wide">
+                    RATING
+                  </h3>
+                  <select
+                    value={selectedRating}
+                    onChange={(e) => setSelectedRating(e.target.value === 'all' ? 'all' : Number(e.target.value))}
+                    className="w-full border border-gray-200 px-3 py-2 text-sm font-light focus:outline-none focus:border-gray-900 bg-white appearance-auto"
+                  >
+                    <option value="all">All Ratings</option>
+                    <option value="5">★★★★★ (5 stars & up)</option>
+                    <option value="4">★★★★☆ (4 stars & up)</option>
+                    <option value="3">★★★☆☆ (3 stars & up)</option>
+                    <option value="2">★★☆☆☆ (2 stars & up)</option>
+                    <option value="1">★☆☆☆☆ (1 star & up)</option>
+                  </select>
+                </div>
+
                 <button
                   onClick={resetFilters}
                   className="text-sm text-gray-600 hover:text-gray-900 font-light underline"
@@ -244,6 +267,24 @@ export default function Products() {
                         <span>${priceRange[1]}</span>
                       </div>
                     </div>
+                  </div>
+
+                  <div className="mb-8">
+                    <h3 className="text-sm font-light mb-4 text-gray-900 tracking-wide">
+                      RATING
+                    </h3>
+                    <select
+                      value={selectedRating}
+                      onChange={(e) => setSelectedRating(e.target.value === 'all' ? 'all' : Number(e.target.value))}
+                      className="w-full border border-gray-200 px-3 py-2 text-sm font-light focus:outline-none focus:border-gray-900 bg-white"
+                    >
+                      <option value="all">All Ratings</option>
+                      <option value="5">★★★★★ (5 stars & up)</option>
+                      <option value="4">★★★★☆ (4 stars & up)</option>
+                      <option value="3">★★★☆☆ (3 stars & up)</option>
+                      <option value="2">★★☆☆☆ (2 stars & up)</option>
+                      <option value="1">★☆☆☆☆ (1 star & up)</option>
+                    </select>
                   </div>
 
                   <button

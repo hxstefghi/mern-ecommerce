@@ -15,6 +15,7 @@ export default function ProductDetail() {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [reviewFilter, setReviewFilter] = useState('all'); // all, 5, 4, 3, 2, 1
   const { addToCart } = useCart();
 
   const fetchProduct = async () => {
@@ -154,12 +155,33 @@ export default function ProductDetail() {
 
         {/* Reviews Section */}
         <div className="mt-16 pt-16 border-t border-gray-200">
-          <div className="flex items-center gap-4 mb-8">
-            <h2 className="text-xl font-light">REVIEWS</h2>
-            {product.numReviews > 0 && (
-              <span className="text-sm text-gray-500 font-light">
-                {product.numReviews} {product.numReviews === 1 ? 'review' : 'reviews'} • ★ {product.rating?.toFixed(1)}
-              </span>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+            <div className="flex items-center gap-4">
+              <h2 className="text-xl font-light">REVIEWS</h2>
+              {product.numReviews > 0 && (
+                <span className="text-sm text-gray-500 font-light">
+                  {product.numReviews} {product.numReviews === 1 ? 'review' : 'reviews'} • ★ {product.rating?.toFixed(1)}
+                </span>
+              )}
+            </div>
+            
+            {/* Review Filter */}
+            {product.reviews && product.reviews.length > 0 && (
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-gray-500 font-light tracking-wide">FILTER:</span>
+                <select
+                  value={reviewFilter}
+                  onChange={(e) => setReviewFilter(e.target.value)}
+                  className="border border-gray-200 px-3 py-2 text-sm font-light focus:outline-none focus:border-gray-900 bg-white"
+                >
+                  <option value="all">All Reviews</option>
+                  <option value="5">★★★★★ (5 stars)</option>
+                  <option value="4">★★★★☆ (4 stars)</option>
+                  <option value="3">★★★☆☆ (3 stars)</option>
+                  <option value="2">★★☆☆☆ (2 stars)</option>
+                  <option value="1">★☆☆☆☆ (1 star)</option>
+                </select>
+              </div>
             )}
           </div>
 
@@ -227,51 +249,61 @@ export default function ProductDetail() {
 
           {/* Reviews List */}
           {product.reviews && product.reviews.length > 0 ? (
-            <div className="space-y-8">
-              {product.reviews.map((review, index) => (
-                <div key={index} className="border-b border-gray-200 pb-8 last:border-b-0">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex-1">
-                      <span className="text-sm font-light">{review.name}</span>
-                      <div className="text-yellow-500 text-sm mt-1">
-                        {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
+            (() => {
+              const filteredReviews = product.reviews.filter(review => 
+                reviewFilter === 'all' || review.rating === parseInt(reviewFilter)
+              );
+              
+              return filteredReviews.length > 0 ? (
+                <div className="space-y-8">
+                  {filteredReviews.map((review, index) => (
+                    <div key={index} className="border-b border-gray-200 pb-8 last:border-b-0">
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex-1">
+                          <span className="text-sm font-light">{review.name}</span>
+                          <div className="text-yellow-500 text-sm mt-1">
+                            {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs text-gray-400 font-light">
+                            {new Date(review.createdAt).toLocaleString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric',
+                              hour: 'numeric',
+                              minute: '2-digit',
+                              hour12: true
+                            })}
+                          </span>
+                          {user?.role === 'admin' && (
+                            <button
+                              onClick={async () => {
+                                if (confirm('Are you sure you want to delete this review?')) {
+                                  try {
+                                    await api.delete(`/products/${product._id}/reviews/${review._id}`);
+                                    toast.success('Review deleted successfully');
+                                    fetchProduct();
+                                } catch {
+                                    toast.error('Failed to delete review');
+                                  }
+                                }
+                              }}
+                              className="text-xs text-red-500 hover:text-red-700 font-light"
+                            >
+                              Delete
+                            </button>
+                          )}
+                        </div>
                       </div>
+                      <p className="text-sm text-gray-600 font-light leading-relaxed">{review.comment}</p>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs text-gray-400 font-light">
-                        {new Date(review.createdAt).toLocaleString('en-US', {
-                          month: 'short',
-                          day: 'numeric',
-                          year: 'numeric',
-                          hour: 'numeric',
-                          minute: '2-digit',
-                          hour12: true
-                        })}
-                      </span>
-                      {user?.role === 'admin' && (
-                        <button
-                          onClick={async () => {
-                            if (confirm('Are you sure you want to delete this review?')) {
-                              try {
-                                await api.delete(`/products/${product._id}/reviews/${review._id}`);
-                                toast.success('Review deleted successfully');
-                                fetchProduct();
-                              } catch (error) {
-                                toast.error('Failed to delete review');
-                              }
-                            }
-                          }}
-                          className="text-xs text-red-500 hover:text-red-700 font-light"
-                        >
-                          Delete
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <p className="text-sm text-gray-600 font-light leading-relaxed">{review.comment}</p>
+                  ))}
                 </div>
-              ))}
-            </div>
+              ) : (
+                <p className="text-gray-400 font-light text-sm">No reviews match this filter.</p>
+              );
+            })()
           ) : (
             <p className="text-gray-400 font-light text-sm">No reviews yet. Be the first to review this product!</p>
           )}
