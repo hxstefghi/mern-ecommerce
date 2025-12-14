@@ -73,6 +73,14 @@ export default function Checkout() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Check if any items are out of stock
+    const outOfStockItems = cart.filter(item => !item.stock || item.stock === 0 || item.stock < item.quantity);
+    if (outOfStockItems.length > 0) {
+      toast.error(`Some items are out of stock or have insufficient quantity. Please remove them from cart.`);
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -127,7 +135,7 @@ export default function Checkout() {
       navigate(`/orders/${data._id}`);
     } catch (error) {
       console.error("Error creating order:", error);
-      toast.error("Failed to create order. Please try again.");
+      toast.error(error.response?.data?.message || "Failed to create order. Please try again.");
     } finally {
       setLoading(false);
     }

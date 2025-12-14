@@ -4,12 +4,15 @@ import { useCart } from "../context/CartContext";
 
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
+  const isOutOfStock = !product.stock || product.stock === 0;
 
   const handleAddToCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    addToCart(product);
-    toast.success("Item added to cart!");
+    if (!isOutOfStock) {
+      addToCart(product);
+      toast.success("Item added to cart!");
+    }
   };
 
   return (
@@ -23,12 +26,19 @@ export default function ProductCard({ product }) {
           alt={product.name}
           className="w-full h-full object-cover group-hover:opacity-90 transition-opacity duration-300"
         />
-        <button
-          onClick={handleAddToCart}
-          className="absolute bottom-4 left-4 right-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3 text-sm font-light tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        >
-          ADD TO CART
-        </button>
+        {isOutOfStock && (
+          <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+            <span className="bg-red-600 text-white px-4 py-2 text-sm font-light">OUT OF STOCK</span>
+          </div>
+        )}
+        {!isOutOfStock && (
+          <button
+            onClick={handleAddToCart}
+            className="absolute bottom-4 left-4 right-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3 text-sm font-light tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
+            ADD TO CART
+          </button>
+        )}
       </div>
       <div className="space-y-1">
         <h2 className="text-sm text-gray-900 dark:text-white font-light line-clamp-1">

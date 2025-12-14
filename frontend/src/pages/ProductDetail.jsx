@@ -36,7 +36,18 @@ export default function ProductDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  const isOutOfStock = !product?.stock || product.stock === 0;
+  const hasInsufficientStock = product?.stock && quantity > product.stock;
+
   const handleAddToCart = () => {
+    if (isOutOfStock) {
+      toast.error('This product is out of stock');
+      return;
+    }
+    if (hasInsufficientStock) {
+      toast.error(`Only ${product.stock} items available in stock`);
+      return;
+    }
     addToCart(product, quantity);
     toast.success(`${quantity} ${quantity > 1 ? 'items' : 'item'} added to cart!`);
   };
@@ -119,10 +130,26 @@ export default function ProductDetail() {
               </p>
             </div>
 
+            {/* Stock Information */}
             <div className="mb-8">
-              <span className="inline-block text-xs text-gray-500 dark:text-gray-400 font-light tracking-wide">
-                IN STOCK
-              </span>
+              <h3 className="text-xs text-gray-500 dark:text-gray-400 mb-3 font-light tracking-wide">AVAILABILITY</h3>
+              {isOutOfStock ? (
+                <div className="flex items-center gap-2">
+                  <span className="inline-block px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-light">
+                    OUT OF STOCK
+                  </span>
+                </div>
+              ) : product.stock <= 5 ? (
+                <div className="flex items-center gap-2">
+                  <span className="inline-block px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-xs font-light">
+                    ONLY {product.stock} LEFT IN STOCK
+                  </span>
+                </div>
+              ) : (
+                <span className="inline-block text-sm text-green-600 dark:text-green-400 font-light">
+                  {product.stock} items available
+                </span>
+              )}
             </div>
 
             <div className="flex items-center gap-6 mb-12">
@@ -130,23 +157,35 @@ export default function ProductDetail() {
               <div className="flex items-center border border-gray-200 dark:border-gray-800">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm dark:text-gray-300"
+                  disabled={isOutOfStock}
+                  className="w-10 h-10 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   -
                 </button>
                 <span className="w-12 h-10 flex items-center justify-center text-sm font-light border-l border-r border-gray-200 dark:border-gray-800 dark:text-gray-300">{quantity}</span>
                 <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm dark:text-gray-300"
+                  onClick={() => setQuantity(Math.min(product.stock || 1, quantity + 1))}
+                  disabled={isOutOfStock}
+                  className="w-10 h-10 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   +
                 </button>
               </div>
+              {hasInsufficientStock && (
+                <span className="text-xs text-orange-600 dark:text-orange-400 font-light">
+                  Only {product.stock} available
+                </span>
+              )}
             </div>
 
             <button
               onClick={handleAddToCart}
-              className="w-full bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 py-4 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors text-sm font-light tracking-wide"
+              disabled={isOutOfStock}
+              className={`w-full py-4 transition-colors text-sm font-light tracking-wide ${
+                isOutOfStock
+                  ? 'bg-gray-400 dark:bg-gray-700 text-gray-200 dark:text-gray-500 cursor-not-allowed'
+                  : 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200'
+              }`}
             >
               ADD TO CART
             </button>

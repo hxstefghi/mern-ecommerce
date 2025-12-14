@@ -76,9 +76,26 @@ export default function Cart() {
                     </button>
                   </div>
                   
-                  <p className="text-sm text-gray-500 dark:text-gray-400 font-light mb-4">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 font-light mb-2">
                     ${item.price.toFixed(2)} each
                   </p>
+                  
+                  {/* Stock warning */}
+                  {(!item.stock || item.stock === 0) && (
+                    <p className="text-xs text-red-600 dark:text-red-400 font-light mb-2">
+                      Out of stock - Please remove from cart
+                    </p>
+                  )}
+                  {item.stock > 0 && item.stock < item.quantity && (
+                    <p className="text-xs text-orange-600 dark:text-orange-400 font-light mb-2">
+                      Only {item.stock} left in stock
+                    </p>
+                  )}
+                  {item.stock > 0 && item.stock <= 5 && item.stock >= item.quantity && (
+                    <p className="text-xs text-orange-600 dark:text-orange-400 font-light mb-2">
+                      Only {item.stock} left in stock
+                    </p>
+                  )}
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
