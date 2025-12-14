@@ -198,7 +198,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   to="/register"
-                  className="text-sm bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-6 py-2 hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-light"
+                  className="text-sm rounded-2xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-6 py-2 hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-light"
                 >
                   Sign Up
                 </Link>
