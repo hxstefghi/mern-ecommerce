@@ -81,14 +81,6 @@ export default function AdminCategories() {
     setShowModal(false);
   };
 
-  if (authLoading || loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-xl font-light">Loading...</div>
-      </div>
-    );
-  }
-
   if (!user || user.role !== "admin") {
     return null;
   }
@@ -101,7 +93,6 @@ export default function AdminCategories() {
           <button
             onClick={() => setShowModal(true)}
             className="px-4 sm:px-6 py-2 bg-black dark:bg-gray-900 text-white font-light hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors text-sm sm:text-base">
-          >
             Add Category
           </button>
         </div>

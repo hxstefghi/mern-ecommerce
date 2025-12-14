@@ -13,30 +13,27 @@ export function useTheme() {
 
 export function ThemeProvider({ children }) {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem("theme");
-    if (saved) {
-      return saved === "dark";
-    }
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") return true;
+    if (savedTheme === "light") return false;
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
+  // Apply theme on mount and when it changes
   useEffect(() => {
     const root = document.documentElement;
     
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-    
     if (isDarkMode) {
       root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
       root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
-    
-    console.log("Theme changed:", isDarkMode ? "dark" : "light", "Classes:", root.className);
   }, [isDarkMode]);
 
   const toggleTheme = () => {
-    console.log("Toggle clicked, current mode:", isDarkMode);
-    setIsDarkMode((prev) => !prev);
+    setIsDarkMode(prev => !prev);
   };
 
   return (

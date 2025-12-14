@@ -34,14 +34,6 @@ export default function AdminDashboard() {
     }
   }, [user]);
 
-  if (authLoading || loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-xl font-light">Loading...</div>
-      </div>
-    );
-  }
-
   if (!user || user.role !== "admin") {
     return null;
   }

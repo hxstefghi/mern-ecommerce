@@ -107,14 +107,6 @@ export default function AdminProducts() {
     setShowModal(false);
   };
 
-  if (authLoading || loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-xl font-light">Loading...</div>
-      </div>
-    );
-  }
-
   if (!user || user.role !== "admin") {
     return null;
   }
@@ -127,7 +119,6 @@ export default function AdminProducts() {
           <button
             onClick={() => setShowModal(true)}
             className="px-4 sm:px-6 py-2 cursor-pointer bg-black dark:bg-gray-900 text-white font-light hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors text-sm sm:text-base">
-          >
             Add Product
           </button>
         </div>
@@ -143,25 +134,25 @@ export default function AdminProducts() {
                 <th className="px-6 py-3 text-left text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
               {products.map((product) => (
-                <tr key={product._id}>
+                <tr key={product._id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <img src={product.image} alt={product.name} className="w-16 h-16 object-cover" />
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap font-light">{product.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap font-light">${product.price}</td>
-                  <td className="px-6 py-4 whitespace-nowrap font-light">{product.stock}</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-light text-gray-900 dark:text-gray-300">{product.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-light text-gray-900 dark:text-gray-300">${product.price}</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-light text-gray-900 dark:text-gray-300">{product.stock}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-light">
                     <button
                       onClick={() => handleEdit(product)}
-                      className="cursor-pointer text-green-500 hover:text-gray-700 mr-4"
+                      className="cursor-pointer text-green-500 hover:text-green-700 dark:hover:text-green-400 mr-4"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(product._id)}
-                      className="cursor-pointer text-red-600 hover:text-red-900"
+                      className="cursor-pointer text-red-600 hover:text-red-900 dark:hover:text-red-400"
                     >
                       Delete
                     </button>

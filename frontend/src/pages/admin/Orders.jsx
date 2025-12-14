@@ -45,14 +45,6 @@ export default function AdminOrders() {
     }
   };
 
-  if (authLoading || loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-xl font-light">Loading...</div>
-      </div>
-    );
-  }
-
   if (!user || user.role !== "admin") {
     return null;
   }
@@ -111,7 +103,7 @@ export default function AdminOrders() {
               className={`cursor-pointer px-4 py-2 text-xs font-light tracking-wide transition-colors ${
                 statusFilter === "shipped"
                   ? "bg-purple-600 text-white"
-                  : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+                  : "bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 dark:text-gray-300 text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
               }`}
             >
               SHIPPED

@@ -112,7 +112,6 @@ export default function Coupons() {
               setShowModal(true);
             }}
             className="px-6 py-2 bg-gray-900 dark:bg-gray-800 text-white font-light text-sm hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors">
-          >
             CREATE COUPON
           </button>
         </div>
@@ -123,7 +122,6 @@ export default function Coupons() {
             <div
               key={coupon._id}
               className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 space-y-4">
-            >
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-lg font-light text-gray-900 dark:text-white mb-1">{coupon.code}</h3>
@@ -148,19 +146,19 @@ export default function Coupons() {
               <div className="flex gap-2 pt-2">
                 <button
                   onClick={() => handleEdit(coupon)}
-                  className="flex-1 px-4 py-2 border border-gray-900 text-gray-900 font-light text-sm hover:bg-gray-50"
+                  className="cursor-pointer flex-1 px-4 py-2 border border-green-500 text-green-500 dark:text-green-500 dark:border-green-500 font-light text-sm hover:bg-gray-50"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleToggleActive(coupon)}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 font-light text-sm hover:bg-gray-50"
+                  className="cursor-pointer flex-1 px-4 py-2 border border-gray-900 text-gray-900 dark:text-white dark:hover:text-gray-700 font-light text-sm hover:bg-gray-50 dark:border-white"
                 >
                   {coupon.isActive ? 'Deactivate' : 'Activate'}
                 </button>
                 <button
                   onClick={() => handleDelete(coupon._id)}
-                  className="px-4 py-2 border border-red-500 text-red-500 font-light text-sm hover:bg-red-50"
+                  className="cursor-pointer px-4 py-2 border border-red-500 text-red-500 font-light text-sm hover:bg-red-50"
                 >
                   Delete
                 </button>
