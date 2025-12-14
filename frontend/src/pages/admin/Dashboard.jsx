@@ -12,7 +12,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'Admin Dashboard - MERN Store';
+    document.title = 'Admin Dashboard';
   }, []);
 
   useEffect(() => {

@@ -18,7 +18,7 @@ export default function OrderDetail() {
   }, [user, authLoading, navigate]);
 
   useEffect(() => {
-    document.title = order ? `Order ${order._id} - MERN Store` : 'Order Details - MERN Store';
+    document.title = order ? `Order ${order._id}` : 'Order Details';
   }, [order]);
 
   useEffect(() => {

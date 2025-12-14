@@ -11,7 +11,7 @@ export default function AdminUsers() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'Manage Users - MERN Store';
+    document.title = 'Manage Users';
   }, []);
   const [editingUser, setEditingUser] = useState(null);
   const [showModal, setShowModal] = useState(false);

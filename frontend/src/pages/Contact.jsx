@@ -10,7 +10,7 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    document.title = 'Contact Us - MERN Store';
+    document.title = 'Contact Us';
   }, []);
 
   const handleSubmit = (e) => {

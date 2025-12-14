@@ -11,7 +11,7 @@ export default function AdminCategories() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'Manage Categories - MERN Store';
+    document.title = 'Manage Categories';
   }, []);
   const [editingCategory, setEditingCategory] = useState(null);
   const [showModal, setShowModal] = useState(false);

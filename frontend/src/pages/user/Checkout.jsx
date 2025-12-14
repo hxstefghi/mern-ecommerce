@@ -13,7 +13,7 @@ export default function Checkout() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    document.title = 'Checkout - MERN Store';
+    document.title = 'Checkout';
   }, []);
   const [couponCode, setCouponCode] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState(null);

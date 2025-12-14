@@ -10,7 +10,7 @@ export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    document.title = 'Manage Orders - MERN Store';
+    document.title = 'Manage Orders';
   }, []);  const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {

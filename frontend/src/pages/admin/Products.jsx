@@ -12,7 +12,7 @@ export default function AdminProducts() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'Manage Products - MERN Store';
+    document.title = 'Manage Products';
   }, []);
   const [editingProduct, setEditingProduct] = useState(null);
   const [showModal, setShowModal] = useState(false);

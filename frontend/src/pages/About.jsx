@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 
 export default function About() {
   useEffect(() => {
-    document.title = 'About Us - MERN Store';
+    document.title = 'About Us';
   }, []);
 
   return (

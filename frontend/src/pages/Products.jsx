@@ -15,7 +15,7 @@ export default function Products() {
   const [sortBy, setSortBy] = useState("default");
 
   useEffect(() => {
-    document.title = 'Products - MERN Store';
+    document.title = 'Products';
   }, []);
 
   useEffect(() => {

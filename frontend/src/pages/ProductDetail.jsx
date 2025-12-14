@@ -38,7 +38,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     if (product?.name) {
-      document.title = `${product.name} - MERN Store`;
+      document.title = `${product.name}`;
     }
   }, [product]);
 

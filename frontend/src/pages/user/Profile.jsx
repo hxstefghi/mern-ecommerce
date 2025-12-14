@@ -14,7 +14,7 @@ export default function Profile() {
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    document.title = 'My Profile - MERN Store';
+    document.title = 'My Profile';
   }, []);
   
   const [formData, setFormData] = useState({

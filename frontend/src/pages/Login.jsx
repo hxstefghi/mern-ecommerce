@@ -11,7 +11,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'Login - MERN Store';
+    document.title = 'Login';
   }, []);
 
   useEffect(() => {

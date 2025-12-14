@@ -11,7 +11,7 @@ export default function Cart() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'Shopping Cart - MERN Store';
+    document.title = 'Shopping Cart';
   }, []);
 
   const handleCheckout = () => {
