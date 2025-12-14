@@ -1,6 +1,11 @@
-import Footer from "../components/Footer";
+import { useEffect } from 'react';
+import Footer from '../components/Footer';
 
 export default function About() {
+  useEffect(() => {
+    document.title = 'About Us - MERN Store';
+  }, []);
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Hero Section with Image and Content */}

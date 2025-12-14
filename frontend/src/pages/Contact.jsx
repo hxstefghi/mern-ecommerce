@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 
 export default function Contact() {
@@ -8,6 +8,10 @@ export default function Contact() {
     message: ""
   });
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    document.title = 'Contact Us - MERN Store';
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

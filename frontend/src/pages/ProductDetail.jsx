@@ -36,6 +36,12 @@ export default function ProductDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  useEffect(() => {
+    if (product?.name) {
+      document.title = `${product.name} - MERN Store`;
+    }
+  }, [product]);
+
   const isOutOfStock = !product?.stock || product.stock === 0;
   const hasInsufficientStock = product?.stock && quantity > product.stock;
 

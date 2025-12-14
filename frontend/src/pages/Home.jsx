@@ -11,6 +11,10 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = 'Home - MERN Store';
+  }, []);
+
+  useEffect(() => {
     const fetchCategories = async () => {
       try {
         const res = await api.get("/categories");

@@ -9,7 +9,9 @@ export default function AdminOrders() {
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [statusFilter, setStatusFilter] = useState("all");
+  useEffect(() => {
+    document.title = 'Manage Orders - MERN Store';
+  }, []);  const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
     if (!authLoading && (!user || user.role !== "admin")) {

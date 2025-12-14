@@ -15,6 +15,10 @@ export default function Products() {
   const [sortBy, setSortBy] = useState("default");
 
   useEffect(() => {
+    document.title = 'Products - MERN Store';
+  }, []);
+
+  useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await api.get("/products");

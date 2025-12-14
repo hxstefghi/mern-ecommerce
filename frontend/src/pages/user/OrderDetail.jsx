@@ -18,6 +18,10 @@ export default function OrderDetail() {
   }, [user, authLoading, navigate]);
 
   useEffect(() => {
+    document.title = order ? `Order ${order._id} - MERN Store` : 'Order Details - MERN Store';
+  }, [order]);
+
+  useEffect(() => {
     const fetchOrder = async () => {
       try {
         const { data } = await api.get(`/orders/${id}`);

@@ -9,6 +9,10 @@ export default function AdminCategories() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    document.title = 'Manage Categories - MERN Store';
+  }, []);
   const [editingCategory, setEditingCategory] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
@@ -99,20 +103,20 @@ export default function AdminCategories() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {categories.map((category) => (
-            <div key={category._id} className="border border-gray-200 p-4 sm:p-6 bg-white">
-              <h3 className="text-xl font-light mb-2">{category.name}</h3>
-              <p className="text-sm font-light text-gray-500 mb-4">{category.description}</p>
-              <p className="text-xs font-light text-gray-400 mb-4">Slug: {category.slug}</p>
+            <div key={category._id} className="border border-gray-200 dark:border-gray-800 p-4 sm:p-6 bg-white dark:bg-gray-900">
+              <h3 className="text-xl font-light mb-2 dark:text-white">{category.name}</h3>
+              <p className="text-sm font-light text-gray-500 dark:text-gray-400 mb-4">{category.description}</p>
+              <p className="text-xs font-light text-gray-400 dark:text-gray-500 mb-4">Slug: {category.slug}</p>
               <div className="flex space-x-4">
                 <button
                   onClick={() => handleEdit(category)}
-                  className="text-blue-600 hover:text-blue-900 text-sm font-light"
+                  className="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 text-sm font-light"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(category._id)}
-                  className="text-red-600 hover:text-red-900 text-sm font-light"
+                  className="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 text-sm font-light"
                 >
                   Delete
                 </button>

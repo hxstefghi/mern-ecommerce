@@ -11,6 +11,10 @@ export default function MyOrders() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = 'My Orders - MERN Store';
+  }, []);
+
+  useEffect(() => {
     if (!authLoading && !user) {
       navigate("/login");
     }

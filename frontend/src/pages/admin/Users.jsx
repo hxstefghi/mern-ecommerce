@@ -9,6 +9,10 @@ export default function AdminUsers() {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    document.title = 'Manage Users - MERN Store';
+  }, []);
   const [editingUser, setEditingUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({

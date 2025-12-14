@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
@@ -11,6 +11,10 @@ export default function Checkout() {
   const { cart, cartTotal, clearCart } = useCart();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    document.title = 'Checkout - MERN Store';
+  }, []);
   const [couponCode, setCouponCode] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [applyingCoupon, setApplyingCoupon] = useState(false);

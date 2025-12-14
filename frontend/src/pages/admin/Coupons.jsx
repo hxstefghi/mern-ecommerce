@@ -18,6 +18,10 @@ export default function Coupons() {
   });
 
   useEffect(() => {
+    document.title = 'Manage Coupons - MERN Store';
+  }, []);
+
+  useEffect(() => {
     if (user?.role === 'admin') {
       fetchCoupons();
     }

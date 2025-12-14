@@ -11,6 +11,10 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Login - MERN Store';
+  }, []);
+
+  useEffect(() => {
     if (!authLoading && user) {
       navigate("/");
     }

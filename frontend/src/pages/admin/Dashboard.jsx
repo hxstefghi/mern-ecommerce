@@ -12,6 +12,10 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = 'Admin Dashboard - MERN Store';
+  }, []);
+
+  useEffect(() => {
     if (!authLoading && (!user || user.role !== "admin")) {
       navigate("/");
     }

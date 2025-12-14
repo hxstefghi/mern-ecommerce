@@ -10,6 +10,10 @@ export default function Register() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Register - MERN Store';
+  }, []);
+
+  useEffect(() => {
     if (!authLoading && user) {
       navigate("/");
     }

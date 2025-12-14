@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
@@ -8,6 +9,10 @@ export default function Cart() {
   const { cart, removeFromCart, updateQuantity, cartTotal, clearCart } =
     useCart();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = 'Shopping Cart - MERN Store';
+  }, []);
 
   const handleCheckout = () => {
     if (!user) {
