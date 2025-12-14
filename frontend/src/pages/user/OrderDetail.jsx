@@ -36,17 +36,17 @@ export default function OrderDetail() {
 
   if (authLoading || loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-xl font-light">Loading...</div>
+      <div className="flex justify-center items-center min-h-screen dark:bg-gray-950">
+        <div className="text-xl font-light dark:text-white">Loading...</div>
       </div>
     );
   }
 
   if (!order) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white dark:bg-gray-950">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <p className="text-gray-500 font-light">Order not found.</p>
+          <p className="text-gray-500 dark:text-gray-400 font-light">Order not found.</p>
         </div>
         <Footer />
       </div>
@@ -65,82 +65,82 @@ export default function OrderDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Link to="/my-orders" className="text-sm text-gray-500 hover:text-gray-900">
+        <Link to="/my-orders" className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200">
           ← Back
         </Link>
         <div className="flex justify-between items-center my-8">
-          <h1 className="text-4xl font-light">Order Details</h1>
+          <h1 className="text-4xl font-light dark:text-white">Order Details</h1>
           <span className={`px-4 py-2 text-sm font-light capitalize ${getStatusColor(order.status)}`}>
             {order.status}
           </span>
         </div>
 
         <div className="space-y-8">
-          <div className="border border-gray-200 p-6">
-            <h2 className="text-xl font-light mb-4">Order Information</h2>
+          <div className="border border-gray-200 dark:border-gray-800 p-6 dark:bg-gray-900">
+            <h2 className="text-xl font-light mb-4 dark:text-white">Order Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-light">
               <div>
-                <p className="text-gray-500">Order ID</p>
-                <p>{order._id}</p>
+                <p className="text-gray-500 dark:text-gray-400">Order ID</p>
+                <p className="dark:text-gray-300">{order._id}</p>
               </div>
               <div>
-                <p className="text-gray-500">Order Date</p>
-                <p>{new Date(order.createdAt).toLocaleDateString()}</p>
+                <p className="text-gray-500 dark:text-gray-400">Order Date</p>
+                <p className="dark:text-gray-300">{new Date(order.createdAt).toLocaleDateString()}</p>
               </div>
               <div>
-                <p className="text-gray-500">Payment Method</p>
-                <p>{order.paymentMethod}</p>
+                <p className="text-gray-500 dark:text-gray-400">Payment Method</p>
+                <p className="dark:text-gray-300">{order.paymentMethod}</p>
               </div>
               <div>
-                <p className="text-gray-500">Payment Status</p>
-                <p>{order.isPaid ? `Paid on ${new Date(order.paidAt).toLocaleDateString()}` : "Not Paid"}</p>
+                <p className="text-gray-500 dark:text-gray-400">Payment Status</p>
+                <p className="dark:text-gray-300">{order.isPaid ? `Paid on ${new Date(order.paidAt).toLocaleDateString()}` : "Not Paid"}</p>
               </div>
             </div>
           </div>
 
-          <div className="border border-gray-200 p-6">
-            <h2 className="text-xl font-light mb-4">Shipping Address</h2>
-            <p className="font-light text-sm">
+          <div className="border border-gray-200 dark:border-gray-800 p-6 dark:bg-gray-900">
+            <h2 className="text-xl font-light mb-4 dark:text-white">Shipping Address</h2>
+            <p className="font-light text-sm dark:text-gray-300">
               {order.shippingAddress.street}<br />
               {order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.zipCode}<br />
               {order.shippingAddress.country}
             </p>
           </div>
 
-          <div className="border border-gray-200 p-6">
-            <h2 className="text-xl font-light mb-4">Order Items</h2>
+          <div className="border border-gray-200 dark:border-gray-800 p-6 dark:bg-gray-900">
+            <h2 className="text-xl font-light mb-4 dark:text-white">Order Items</h2>
             <div className="space-y-4">
               {order.orderItems.map((item) => (
-                <div key={item._id} className="flex items-center gap-4 pb-4 border-b border-gray-100 last:border-0">
+                <div key={item._id} className="flex items-center gap-4 pb-4 border-b border-gray-100 dark:border-gray-800 last:border-0">
                   <img src={item.image} alt={item.name} className="w-20 h-20 object-cover" />
                   <div className="flex-1">
-                    <p className="font-light">{item.name}</p>
-                    <p className="text-sm font-light text-gray-500">Quantity: {item.quantity}</p>
+                    <p className="font-light dark:text-gray-300">{item.name}</p>
+                    <p className="text-sm font-light text-gray-500 dark:text-gray-400">Quantity: {item.quantity}</p>
                   </div>
-                  <p className="font-light">${(item.price * item.quantity).toFixed(2)}</p>
+                  <p className="font-light dark:text-gray-300">${(item.price * item.quantity).toFixed(2)}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="border border-gray-200 p-6">
-            <h2 className="text-xl font-light mb-4">Order Summary</h2>
+          <div className="border border-gray-200 dark:border-gray-800 p-6 dark:bg-gray-900">
+            <h2 className="text-xl font-light mb-4 dark:text-white">Order Summary</h2>
             <div className="space-y-2">
-              <div className="flex justify-between font-light text-sm">
+              <div className="flex justify-between font-light text-sm dark:text-gray-300">
                 <span>Items Price</span>
                 <span>${order.itemsPrice.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between font-light text-sm">
+              <div className="flex justify-between font-light text-sm dark:text-gray-300">
                 <span>Shipping</span>
                 <span>${order.shippingPrice.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between font-light text-sm">
+              <div className="flex justify-between font-light text-sm dark:text-gray-300">
                 <span>Tax</span>
                 <span>${order.taxPrice.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between font-light text-lg pt-4 border-t border-gray-200">
+              <div className="flex justify-between font-light text-lg pt-4 border-t border-gray-200 dark:border-gray-800 dark:text-white">
                 <span>Total</span>
                 <span>${order.totalPrice.toFixed(2)}</span>
               </div>

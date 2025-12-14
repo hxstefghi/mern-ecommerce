@@ -95,26 +95,26 @@ export default function AdminUsers() {
   return (
     <AdminLayout>
       <div className="p-4 sm:p-6 lg:p-8">
-        <h1 className="text-xl sm:text-2xl font-light text-gray-900 mb-6 sm:mb-8">User Management</h1>
+        <h1 className="text-xl sm:text-2xl font-light text-gray-900 dark:text-white mb-6 sm:mb-8">User Management</h1>
 
-        <div className="border border-gray-200 overflow-x-auto bg-white">
+        <div className="border border-gray-200 dark:border-gray-800 overflow-x-auto bg-white dark:bg-gray-900">
           <table className="w-full min-w-[600px]">
-            <thead className="bg-gray-50">
+            <thead className="bg-gray-50 dark:bg-gray-800">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 uppercase tracking-wider">Name</th>
-                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 uppercase tracking-wider">Email</th>
-                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 uppercase tracking-wider">Role</th>
-                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wider">Name</th>
+                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wider">Email</th>
+                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wider">Role</th>
+                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
               {users.map((u) => (
-                <tr key={u._id}>
-                  <td className="px-6 py-4 whitespace-nowrap font-light">{u.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap font-light">{u.email}</td>
+                <tr key={u._id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                  <td className="px-6 py-4 whitespace-nowrap font-light text-gray-900 dark:text-gray-300">{u.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-light text-gray-900 dark:text-gray-300">{u.email}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`px-2 py-1 text-xs font-light ${
-                      u.role === "admin" ? "bg-purple-100 text-purple-800" : "bg-gray-100 text-gray-800"
+                      u.role === "admin" ? "bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200" : "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300"
                     }`}>
                       {u.role}
                     </span>
@@ -142,9 +142,9 @@ export default function AdminUsers() {
         </div>
 
         {showModal && (
-          <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-8 max-w-md w-full mx-4">
-              <h2 className="text-2xl font-light mb-6">Edit User</h2>
+          <div className="fixed inset-0 bg-black/50 dark:bg-black/70 bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white dark:bg-gray-900 border dark:border-gray-800 p-8 max-w-md w-full mx-4">
+              <h2 className="text-2xl font-light text-gray-900 dark:text-white mb-6">Edit User</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <input
@@ -152,7 +152,7 @@ export default function AdminUsers() {
                     placeholder="Name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-2 border-b border-gray-300 focus:border-black outline-none font-light"
+                    className="w-full px-4 py-2 border-b border-gray-300 dark:border-gray-700 bg-transparent dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light"
                     required
                   />
                 </div>
@@ -162,7 +162,7 @@ export default function AdminUsers() {
                     placeholder="Email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-2 border-b border-gray-300 focus:border-black outline-none font-light"
+                    className="w-full px-4 py-2 border-b border-gray-300 dark:border-gray-700 bg-transparent dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light"
                     required
                   />
                 </div>
@@ -170,7 +170,7 @@ export default function AdminUsers() {
                   <select
                     value={formData.role}
                     onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                    className="w-full px-4 py-2 border-b border-gray-300 focus:border-black outline-none font-light"
+                    className="w-full px-4 py-2 border-b border-gray-300 dark:border-gray-700 bg-transparent dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light"
                   >
                     <option value="user">User</option>
                     <option value="admin">Admin</option>
@@ -179,14 +179,14 @@ export default function AdminUsers() {
                 <div className="flex space-x-4 pt-4">
                   <button
                     type="submit"
-                    className="flex-1 px-6 py-2 bg-black text-white font-light hover:bg-gray-800 transition-colors"
+                    className="flex-1 px-6 py-2 bg-black dark:bg-gray-900 text-white font-light hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
                   >
                     Update
                   </button>
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="flex-1 px-6 py-2 border border-gray-300 font-light hover:border-black transition-colors"
+                    className="flex-1 px-6 py-2 border border-gray-300 dark:border-gray-700 dark:text-gray-300 font-light hover:border-black dark:hover:border-gray-500 transition-colors"
                   >
                     Cancel
                   </button>

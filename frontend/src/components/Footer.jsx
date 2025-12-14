@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-100 mt-24">
+    <footer className="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 mt-24">
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
-            <h3 className="text-xl font-light tracking-wider mb-4 text-gray-900">HXSTE</h3>
-            <p className="text-sm text-gray-500 font-light leading-relaxed">
+            <h3 className="text-xl font-light tracking-wider mb-4 text-gray-900 dark:text-white">HXSTE</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-300 font-light leading-relaxed">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, aliquam!
             </p>
             <div className="flex gap-4 mt-6">
@@ -15,7 +15,7 @@ export default function Footer() {
                 href="https://www.facebook.com/Senpai.Christian1" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-gray-900 transition-colors"
+                className="text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -26,7 +26,7 @@ export default function Footer() {
                 href="https://github.com/hxstefghi" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-gray-900 transition-colors"
+                className="text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 aria-label="GitHub"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -37,7 +37,7 @@ export default function Footer() {
                 href="https://www.instagram.com/hxstee/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-gray-900 transition-colors"
+                className="text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -47,68 +47,68 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <h4 className="text-sm font-light mb-4 text-gray-900 tracking-wide">SHOP</h4>
-            <ul className="space-y-3 text-sm text-gray-500 font-light">
+            <h4 className="text-sm font-light mb-4 text-gray-900 dark:text-white tracking-wide">SHOP</h4>
+            <ul className="space-y-3 text-sm text-gray-500 dark:text-gray-300 font-light">
               <li>
-                <Link to="/" className="hover:text-gray-900 transition-colors">
+                <Link to="/" className="hover:text-gray-900 dark:hover:text-white transition-colors">
                   All Products
                 </Link>
               </li>
               <li>
-                <Link to="/" className="hover:text-gray-900 transition-colors">
+                <Link to="/" className="hover:text-gray-900 dark:hover:text-white transition-colors">
                   Featured
                 </Link>
               </li>
               <li>
-                <Link to="/" className="hover:text-gray-900 transition-colors">
+                <Link to="/" className="hover:text-gray-900 dark:hover:text-white transition-colors">
                   New Arrivals
                 </Link>
               </li>
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-light mb-4 text-gray-900 tracking-wide">ACCOUNT</h4>
-            <ul className="space-y-3 text-sm text-gray-500 font-light">
+            <h4 className="text-sm font-light mb-4 text-gray-900 dark:text-white tracking-wide">ACCOUNT</h4>
+            <ul className="space-y-3 text-sm text-gray-500 dark:text-gray-300 font-light">
               <li>
-                <Link to="/login" className="hover:text-gray-900 transition-colors">
+                <Link to="/login" className="hover:text-gray-900 dark:hover:text-white transition-colors">
                   Login
                 </Link>
               </li>
               <li>
-                <Link to="/register" className="hover:text-gray-900 transition-colors">
+                <Link to="/register" className="hover:text-gray-900 dark:hover:text-white transition-colors">
                   Register
                 </Link>
               </li>
               <li>
-                <Link to="/cart" className="hover:text-gray-900 transition-colors">
+                <Link to="/cart" className="hover:text-gray-900 dark:hover:text-white transition-colors">
                   Cart
                 </Link>
               </li>
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-light mb-4 text-gray-900 tracking-wide">SUPPORT</h4>
-            <ul className="space-y-3 text-sm text-gray-500 font-light">
+            <h4 className="text-sm font-light mb-4 text-gray-900 dark:text-white tracking-wide">SUPPORT</h4>
+            <ul className="space-y-3 text-sm text-gray-500 dark:text-gray-300 font-light">
               <li>
-                <a href="/contact" className="hover:text-gray-900 transition-colors">
+                <a href="/contact" className="hover:text-gray-900 dark:hover:text-white transition-colors">
                   Contact
                 </a>
               </li>
               <li>
-                <Link to="/" className="hover:text-gray-900 transition-colors">
+                <Link to="/" className="hover:text-gray-900 dark:hover:text-white transition-colors">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link to="/" className="hover:text-gray-900 transition-colors">
+                <Link to="/" className="hover:text-gray-900 dark:hover:text-white transition-colors">
                   Shipping
                 </Link>
               </li>
             </ul>
           </div>
         </div>
-        <div className="border-t border-gray-100 mt-12 pt-8 text-center">
-          <p className="text-xs text-gray-400 font-light tracking-wide">&copy; 2025 STORE. ALL RIGHTS RESERVED.</p>
+        <div className="border-t border-gray-100 dark:border-gray-800 mt-12 pt-8 text-center">
+          <p className="text-xs text-gray-400 dark:text-gray-500 font-light tracking-wide">&copy; 2025 STORE. ALL RIGHTS RESERVED.</p>
         </div>
       </div>
     </footer>

@@ -104,14 +104,14 @@ export default function Coupons() {
     <AdminLayout>
       <div className="p-4 sm:p-6 lg:p-8">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-light">COUPONS</h1>
+          <h1 className="text-2xl font-light text-gray-900 dark:text-white">COUPONS</h1>
           <button
             onClick={() => {
               setEditingCoupon(null);
               setFormData({ code: '', discount: '', expirationDate: '', isActive: true });
               setShowModal(true);
             }}
-            className="px-6 py-2 bg-gray-900 text-white font-light text-sm hover:bg-gray-800 transition-colors"
+            className="px-6 py-2 bg-gray-900 dark:bg-gray-800 text-white font-light text-sm hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors">
           >
             CREATE COUPON
           </button>
@@ -122,26 +122,26 @@ export default function Coupons() {
           {coupons.map((coupon) => (
             <div
               key={coupon._id}
-              className="border border-gray-200 p-6 space-y-4"
+              className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 space-y-4">
             >
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-lg font-light mb-1">{coupon.code}</h3>
-                  <p className="text-2xl font-light text-gray-900">{coupon.discount}% OFF</p>
+                  <h3 className="text-lg font-light text-gray-900 dark:text-white mb-1">{coupon.code}</h3>
+                  <p className="text-2xl font-light text-gray-900 dark:text-white">{coupon.discount}% OFF</p>
                 </div>
                 <span
                   className={`text-xs px-2 py-1 ${
-                    coupon.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                    coupon.isActive ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300'
                   }`}
                 >
                   {coupon.isActive ? 'ACTIVE' : 'INACTIVE'}
                 </span>
               </div>
 
-              <div className="text-sm text-gray-500 font-light space-y-1">
+              <div className="text-sm text-gray-500 dark:text-gray-400 font-light space-y-1">
                 <p>Expires: {new Date(coupon.expirationDate).toLocaleDateString()}</p>
                 {new Date(coupon.expirationDate) < new Date() && (
-                  <p className="text-red-500">EXPIRED</p>
+                  <p className="text-red-500 dark:text-red-400">EXPIRED</p>
                 )}
               </div>
 
@@ -170,37 +170,37 @@ export default function Coupons() {
         </div>
 
         {coupons.length === 0 && (
-          <div className="text-center py-12 border border-gray-200">
-            <p className="text-gray-400 font-light">No coupons yet. Create one to get started.</p>
+          <div className="text-center py-12 border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+            <p className="text-gray-400 dark:text-gray-500 font-light">No coupons yet. Create one to get started.</p>
           </div>
         )}
       </div>
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white max-w-md w-full p-8">
-            <h2 className="text-xl font-light mb-6">
+        <div className="fixed inset-0 bg-black/50 dark:bg-black/70 z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-gray-900 border dark:border-gray-800 max-w-md w-full p-8">
+            <h2 className="text-xl font-light text-gray-900 dark:text-white mb-6">
               {editingCoupon ? 'EDIT COUPON' : 'CREATE COUPON'}
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-2 font-light tracking-wide">
                   COUPON CODE
                 </label>
                 <input
                   type="text"
                   value={formData.code}
                   onChange={(e) => setFormData({ ...formData, code: e.target.value.toUpperCase() })}
-                  className="w-full border border-gray-300 px-4 py-3 font-light text-sm focus:outline-none focus:border-gray-400"
+                  className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 dark:text-white px-4 py-3 font-light text-sm focus:outline-none focus:border-gray-400 dark:focus:border-gray-500"
                   placeholder="SAVE20"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-2 font-light tracking-wide">
                   DISCOUNT (%)
                 </label>
                 <input
@@ -209,21 +209,21 @@ export default function Coupons() {
                   max="100"
                   value={formData.discount}
                   onChange={(e) => setFormData({ ...formData, discount: e.target.value })}
-                  className="w-full border border-gray-300 px-4 py-3 font-light text-sm focus:outline-none focus:border-gray-400"
+                  className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 dark:text-white px-4 py-3 font-light text-sm focus:outline-none focus:border-gray-400 dark:focus:border-gray-500"
                   placeholder="20"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-2 font-light tracking-wide">
                   EXPIRATION DATE
                 </label>
                 <input
                   type="date"
                   value={formData.expirationDate}
                   onChange={(e) => setFormData({ ...formData, expirationDate: e.target.value })}
-                  className="w-full border border-gray-300 px-4 py-3 font-light text-sm focus:outline-none focus:border-gray-400"
+                  className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 dark:text-white px-4 py-3 font-light text-sm focus:outline-none focus:border-gray-400 dark:focus:border-gray-500"
                   required
                   min={new Date().toISOString().split('T')[0]}
                 />
@@ -237,7 +237,7 @@ export default function Coupons() {
                   onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
                   className="w-4 h-4"
                 />
-                <label htmlFor="isActive" className="text-sm font-light text-gray-700">
+                <label htmlFor="isActive" className="text-sm font-light text-gray-700 dark:text-gray-300">
                   Active
                 </label>
               </div>
@@ -250,13 +250,13 @@ export default function Coupons() {
                     setEditingCoupon(null);
                     setFormData({ code: '', discount: '', expirationDate: '', isActive: true });
                   }}
-                  className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 font-light text-sm hover:bg-gray-50"
+                  className="flex-1 px-6 py-3 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-light text-sm hover:bg-gray-50 dark:hover:bg-gray-800"
                 >
                   CANCEL
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-6 py-3 bg-gray-900 text-white font-light text-sm hover:bg-gray-800"
+                  className="flex-1 px-6 py-3 bg-gray-900 dark:bg-gray-800 text-white font-light text-sm hover:bg-gray-800 dark:hover:bg-gray-700"
                 >
                   {editingCoupon ? 'UPDATE' : 'CREATE'}
                 </button>

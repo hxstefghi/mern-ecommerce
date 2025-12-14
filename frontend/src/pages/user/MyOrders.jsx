@@ -35,8 +35,8 @@ export default function MyOrders() {
 
   if (authLoading || loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-xl font-light">Loading...</div>
+      <div className="flex justify-center items-center min-h-screen dark:bg-gray-950">
+        <div className="text-xl font-light dark:text-white">Loading...</div>
       </div>
     );
   }
@@ -53,16 +53,16 @@ export default function MyOrders() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-light mb-8">My Orders</h1>
+        <h1 className="text-4xl font-light mb-8 dark:text-white">My Orders</h1>
 
         {orders.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 font-light mb-6">You haven't placed any orders yet.</p>
+            <p className="text-gray-500 dark:text-gray-400 font-light mb-6">You haven't placed any orders yet.</p>
             <Link
               to="/products"
-              className="inline-block px-8 py-3 bg-black text-white font-light hover:bg-gray-800 transition-colors"
+              className="inline-block px-8 py-3 bg-black dark:bg-white text-white dark:text-black font-light hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
             >
               Start Shopping
             </Link>
@@ -73,20 +73,20 @@ export default function MyOrders() {
               <Link
                 key={order._id}
                 to={`/orders/${order._id}`}
-                className="block border border-gray-200 p-6 hover:border-black transition-colors"
+                className="block border border-gray-200 dark:border-gray-800 p-6 hover:border-black dark:hover:border-gray-600 transition-colors dark:bg-gray-900"
               >
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
                   <div>
-                    <p className="text-xs font-light text-gray-500 uppercase tracking-wide">Order ID</p>
-                    <p className="font-light">{order._id.slice(-8)}</p>
+                    <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide">Order ID</p>
+                    <p className="font-light dark:text-gray-300">{order._id.slice(-8)}</p>
                   </div>
                   <div>
-                    <p className="text-xs font-light text-gray-500 uppercase tracking-wide">Date</p>
-                    <p className="font-light">{new Date(order.createdAt).toLocaleDateString()}</p>
+                    <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide">Date</p>
+                    <p className="font-light dark:text-gray-300">{new Date(order.createdAt).toLocaleDateString()}</p>
                   </div>
                   <div>
-                    <p className="text-xs font-light text-gray-500 uppercase tracking-wide">Total</p>
-                    <p className="font-light">${order.totalPrice.toFixed(2)}</p>
+                    <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide">Total</p>
+                    <p className="font-light dark:text-gray-300">${order.totalPrice.toFixed(2)}</p>
                   </div>
                   <div>
                     <span className={`px-4 py-2 text-sm font-light capitalize ${getStatusColor(order.status)}`}>
@@ -95,11 +95,11 @@ export default function MyOrders() {
                   </div>
                 </div>
 
-                <div className="border-t border-gray-100 pt-4">
-                  <p className="text-xs font-light text-gray-500 uppercase tracking-wide mb-2">Items</p>
+                <div className="border-t border-gray-100 dark:border-gray-800 pt-4">
+                  <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Items</p>
                   <div className="flex flex-wrap gap-2">
                     {order.orderItems.map((item, index) => (
-                      <span key={index} className="text-sm font-light text-gray-600">
+                      <span key={index} className="text-sm font-light text-gray-600 dark:text-gray-400">
                         {item.name} x {item.quantity}
                         {index < order.orderItems.length - 1 && ","}
                       </span>

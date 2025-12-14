@@ -97,10 +97,10 @@ export default function AdminCategories() {
     <AdminLayout>
       <div className="p-4 sm:p-6 lg:p-8">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 sm:mb-8">
-          <h1 className="text-xl sm:text-2xl font-light text-gray-900">Category Management</h1>
+          <h1 className="text-xl sm:text-2xl font-light text-gray-900 dark:text-white">Category Management</h1>
           <button
             onClick={() => setShowModal(true)}
-            className="px-4 sm:px-6 py-2 bg-black text-white font-light hover:bg-gray-800 transition-colors text-sm sm:text-base"
+            className="px-4 sm:px-6 py-2 bg-black dark:bg-gray-900 text-white font-light hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors text-sm sm:text-base">
           >
             Add Category
           </button>
@@ -132,14 +132,14 @@ export default function AdminCategories() {
 
         {categories.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500 font-light">No categories found</p>
+            <p className="text-gray-500 dark:text-gray-400 font-light">No categories found</p>
           </div>
         )}
 
         {showModal && (
-          <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-8 max-w-md w-full mx-4">
-              <h2 className="text-2xl font-light mb-6">
+          <div className="fixed inset-0 bg-black/50 dark:bg-black/70 bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white dark:bg-gray-900 border dark:border-gray-800 p-8 max-w-md w-full mx-4">
+              <h2 className="text-2xl font-light text-gray-900 dark:text-white mb-6">
                 {editingCategory ? "Edit Category" : "Add Category"}
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -149,7 +149,7 @@ export default function AdminCategories() {
                     placeholder="Category Name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-2 border-b border-gray-300 focus:border-black outline-none font-light"
+                    className="w-full px-4 py-2 border-b border-gray-300 dark:border-gray-700 bg-transparent dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light"
                     required
                   />
                 </div>
@@ -158,21 +158,21 @@ export default function AdminCategories() {
                     placeholder="Description"
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 focus:border-black outline-none font-light"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-transparent dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light"
                     rows="3"
                   />
                 </div>
                 <div className="flex space-x-4 pt-4">
                   <button
                     type="submit"
-                    className="flex-1 px-6 py-2 bg-black text-white font-light hover:bg-gray-800 transition-colors"
+                    className="flex-1 px-6 py-2 bg-black dark:bg-gray-900 text-white font-light hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
                   >
                     {editingCategory ? "Update" : "Create"}
                   </button>
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="flex-1 px-6 py-2 border border-gray-300 font-light hover:border-black transition-colors"
+                    className="flex-1 px-6 py-2 border border-gray-300 dark:border-gray-700 dark:text-gray-300 font-light hover:border-black dark:hover:border-gray-500 transition-colors"
                   >
                     Cancel
                   </button>

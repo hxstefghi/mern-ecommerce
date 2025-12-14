@@ -61,61 +61,61 @@ export default function AdminDashboard() {
   return (
     <AdminLayout>
       <div className="p-4 sm:p-6 lg:p-8">
-        <h2 className="text-xl sm:text-2xl font-light text-gray-900 mb-6 sm:mb-8">Dashboard</h2>
+        <h2 className="text-xl sm:text-2xl font-light text-gray-900 dark:text-white mb-6 sm:mb-8">Dashboard</h2>
 
           {analytics && (
             <>
               {/* Key Metrics */}
               <div className="mb-6 sm:mb-8">
-                <h3 className="text-xs font-light text-gray-500 uppercase tracking-wide mb-4">
+                <h3 className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-4">
                   Key Metrics
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                  <div className="bg-white border border-gray-200 p-4 sm:p-6">
-                    <p className="text-xs font-light text-gray-500 uppercase tracking-wide mb-2">
+                  <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 sm:p-6">
+                    <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                       Revenue
                     </p>
-                    <p className="text-lg sm:text-2xl font-light text-gray-900">
+                    <p className="text-lg sm:text-2xl font-light text-gray-900 dark:text-white">
                       ${analytics.totalRevenue.toFixed(2)}
                     </p>
                   </div>
-                  <div className="bg-white border border-gray-200 p-4 sm:p-6">
-                    <p className="text-xs font-light text-gray-500 uppercase tracking-wide mb-2">
+                  <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 sm:p-6">
+                    <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                       Orders
                     </p>
-                    <p className="text-lg sm:text-2xl font-light text-gray-900">
+                    <p className="text-lg sm:text-2xl font-light text-gray-900 dark:text-white">
                       {analytics.totalOrders}
                     </p>
                   </div>
-                  <div className="bg-white border border-gray-200 p-4 sm:p-6">
-                    <p className="text-xs font-light text-gray-500 uppercase tracking-wide mb-2">
+                  <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 sm:p-6">
+                    <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                       Users
                     </p>
-                    <p className="text-lg sm:text-2xl font-light text-gray-900">
+                    <p className="text-lg sm:text-2xl font-light text-gray-900 dark:text-white">
                       {analytics.totalUsers}
                     </p>
                   </div>
-                  <div className="bg-white border border-gray-200 p-4 sm:p-6">
-                    <p className="text-xs font-light text-gray-500 uppercase tracking-wide mb-2">
+                  <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 sm:p-6">
+                    <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                       Products
                     </p>
-                    <p className="text-lg sm:text-2xl font-light text-gray-900">
+                    <p className="text-lg sm:text-2xl font-light text-gray-900 dark:text-white">
                       {analytics.totalProducts}
                     </p>
                   </div>
-                  <div className="bg-white border border-gray-200 p-4 sm:p-6">
-                    <p className="text-xs font-light text-gray-500 uppercase tracking-wide mb-2">
+                  <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 sm:p-6">
+                    <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                       Pending
                     </p>
-                    <p className="text-lg sm:text-2xl font-light text-yellow-600">
+                    <p className="text-lg sm:text-2xl font-light text-yellow-600 dark:text-yellow-500">
                       {analytics.pendingOrders}
                     </p>
                   </div>
-                  <div className="bg-white border border-gray-200 p-4 sm:p-6">
-                    <p className="text-xs font-light text-gray-500 uppercase tracking-wide mb-2">
+                  <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 sm:p-6">
+                    <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                       Delivered
                     </p>
-                    <p className="text-lg sm:text-2xl font-light text-green-600">
+                    <p className="text-lg sm:text-2xl font-light text-green-600 dark:text-green-500">
                       {analytics.deliveredOrders}
                     </p>
                   </div>
@@ -124,10 +124,10 @@ export default function AdminDashboard() {
 
               {/* Daily Sales Chart */}
               <div className="mb-6 sm:mb-8">
-                <h3 className="text-xs font-light text-gray-500 uppercase tracking-wide mb-4">
+                <h3 className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-4">
                   Daily Sales (Last 7 Days)
                 </h3>
-                <div className="bg-white border border-gray-200 p-4 sm:p-6">
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 sm:p-6">
                   <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={analytics.dailySales}>
                       <CartesianGrid
@@ -148,11 +148,12 @@ export default function AdminDashboard() {
                       />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: "white",
-                          border: "1px solid #e5e7eb",
+                          backgroundColor: "rgba(17, 24, 39, 0.95)",
+                          border: "1px solid #374151",
                           borderRadius: 0,
                           fontSize: 11,
                           fontWeight: 300,
+                          color: "#fff",
                         }}
                       />
                       <Legend
@@ -164,17 +165,17 @@ export default function AdminDashboard() {
                       <Line
                         type="monotone"
                         dataKey="sales"
-                        stroke="#111827"
+                        stroke="#3b82f6"
                         strokeWidth={2}
-                        dot={{ fill: "#111827", r: 4 }}
+                        dot={{ fill: "#3b82f6", r: 4 }}
                         name="Sales ($)"
                       />
                       <Line
                         type="monotone"
                         dataKey="orders"
-                        stroke="#9ca3af"
+                        stroke="#8b5cf6"
                         strokeWidth={2}
-                        dot={{ fill: "#9ca3af", r: 4 }}
+                        dot={{ fill: "#8b5cf6", r: 4 }}
                         name="Orders"
                       />
                     </LineChart>
@@ -184,21 +185,21 @@ export default function AdminDashboard() {
 
               {/* Top Selling Products */}
               <div className="mb-6 sm:mb-8">
-                <h3 className="text-xs font-light text-gray-500 uppercase tracking-wide mb-4">
+                <h3 className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-4">
                   Top Selling Products
                 </h3>
-                <div className="bg-white border border-gray-200 overflow-hidden">
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 overflow-hidden">
                   <div className="overflow-x-auto">
                     <table className="w-full min-w-[600px]">
-                      <thead className="border-b border-gray-200">
+                      <thead className="border-b border-gray-200 dark:border-gray-800">
                         <tr>
-                          <th className="text-left py-3 px-4 sm:px-6 text-xs font-light text-gray-500 uppercase tracking-wide">
+                          <th className="text-left py-3 px-4 sm:px-6 text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide">
                             Product
                           </th>
-                          <th className="text-right py-3 px-4 sm:px-6 text-xs font-light text-gray-500 uppercase tracking-wide">
+                          <th className="text-right py-3 px-4 sm:px-6 text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide">
                             Units Sold
                           </th>
-                          <th className="text-right py-3 px-4 sm:px-6 text-xs font-light text-gray-500 uppercase tracking-wide">
+                          <th className="text-right py-3 px-4 sm:px-6 text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide">
                             Revenue
                           </th>
                         </tr>
@@ -206,21 +207,21 @@ export default function AdminDashboard() {
                       <tbody>
                         {analytics.topProducts && analytics.topProducts.length > 0 ? (
                           analytics.topProducts.map((product, index) => (
-                            <tr key={index} className="border-b border-gray-200 last:border-b-0">
-                              <td className="py-3 px-4 sm:px-6 text-sm font-light text-gray-900">
+                            <tr key={index} className="border-b border-gray-200 dark:border-gray-800 last:border-b-0">
+                              <td className="py-3 px-4 sm:px-6 text-sm font-light text-gray-900 dark:text-gray-300">
                                 {product.name}
                               </td>
-                              <td className="py-3 px-4 sm:px-6 text-sm font-light text-gray-900 text-right">
+                              <td className="py-3 px-4 sm:px-6 text-sm font-light text-gray-900 dark:text-gray-300 text-right">
                                 {product.totalSold}
                               </td>
-                              <td className="py-3 px-4 sm:px-6 text-sm font-light text-gray-900 text-right">
+                              <td className="py-3 px-4 sm:px-6 text-sm font-light text-gray-900 dark:text-gray-300 text-right">
                                 ${product.revenue.toFixed(2)}
                               </td>
                             </tr>
                           ))
                         ) : (
                           <tr>
-                            <td colSpan="3" className="py-6 px-4 sm:px-6 text-center text-sm font-light text-gray-400">
+                            <td colSpan="3" className="py-6 px-4 sm:px-6 text-center text-sm font-light text-gray-400 dark:text-gray-500">
                               No sales data available
                             </td>
                           </tr>
@@ -233,48 +234,49 @@ export default function AdminDashboard() {
 
               {/* Analytics Charts */}
               <div className="mb-6 sm:mb-8">
-                <h3 className="text-xs font-light text-gray-500 uppercase tracking-wide mb-4">
+                <h3 className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-4">
                   Analytics
                 </h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                  <div className="bg-white border border-gray-200 p-4 sm:p-6">
-                    <h4 className="text-sm font-light text-gray-900 mb-4 sm:mb-6 uppercase tracking-wide">
+                  <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 sm:p-6">
+                    <h4 className="text-sm font-light text-gray-900 dark:text-white mb-4 sm:mb-6 uppercase tracking-wide">
                       Overview
                     </h4>
                     <ResponsiveContainer width="100%" height={250}>
                       <BarChart data={overviewData}>
                         <CartesianGrid
                           strokeDasharray="3 3"
-                          stroke="#f3f4f6"
+                          stroke="#374151"
                           vertical={false}
                         />
                         <XAxis
                           dataKey="name"
-                          tick={{ fontSize: 11, fill: "#9ca3af" }}
+                          tick={{ fontSize: 11, fill: "#d1d5db" }}
                           axisLine={false}
                           tickLine={false}
                         />
                         <YAxis
-                          tick={{ fontSize: 11, fill: "#9ca3af" }}
+                          tick={{ fontSize: 11, fill: "#d1d5db" }}
                           axisLine={false}
                           tickLine={false}
                         />
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: "white",
-                            border: "1px solid #e5e7eb",
+                            backgroundColor: "rgba(17, 24, 39, 0.95)",
+                            border: "1px solid #374151",
                             borderRadius: 0,
                             fontSize: 11,
                             fontWeight: 300,
+                            color: "#fff",
                           }}
                         />
-                        <Bar dataKey="count" fill="#111827" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="count" fill="#10b981" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
 
-                  <div className="bg-white border border-gray-200 p-4 sm:p-6">
-                    <h4 className="text-sm font-light text-gray-900 mb-4 sm:mb-6 uppercase tracking-wide">
+                  <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 sm:p-6">
+                    <h4 className="text-sm font-light text-gray-900 dark:text-white mb-4 sm:mb-6 uppercase tracking-wide">
                       Order Status
                     </h4>
                     <ResponsiveContainer width="100%" height={250}>
@@ -297,11 +299,12 @@ export default function AdminDashboard() {
                         </Pie>
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: "white",
-                            border: "1px solid #e5e7eb",
+                            backgroundColor: "rgba(17, 24, 39, 0.95)",
+                            border: "1px solid #374151",
                             borderRadius: 0,
                             fontSize: 11,
                             fontWeight: 300,
+                            color: "#fff",
                           }}
                         />
                       </PieChart>

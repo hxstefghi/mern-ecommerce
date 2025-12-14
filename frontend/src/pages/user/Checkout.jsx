@@ -30,10 +30,10 @@ export default function Checkout() {
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white dark:bg-gray-950">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-light mb-8">Checkout</h1>
-          <p className="text-gray-500 font-light">Your cart is empty.</p>
+          <h1 className="text-4xl font-light mb-8 dark:text-white">Checkout</h1>
+          <p className="text-gray-500 dark:text-gray-400 font-light">Your cart is empty.</p>
         </div>
         <Footer />
       </div>
@@ -134,20 +134,20 @@ export default function Checkout() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-light mb-12">Checkout</h1>
+        <h1 className="text-4xl font-light mb-12 dark:text-white">Checkout</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <form onSubmit={handleSubmit} className="space-y-8">
               <div>
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-light">Shipping Information</h2>
+                  <h2 className="text-2xl font-light dark:text-white">Shipping Information</h2>
                   {user?.address?.street && (
                     <Link
                       to="/profile"
-                      className="text-sm font-light text-gray-600 hover:text-gray-900 underline"
+                      className="text-sm font-light text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 underline"
                     >
                       Edit Address
                     </Link>
@@ -155,12 +155,12 @@ export default function Checkout() {
                 </div>
                 
                 {user?.address?.street ? (
-                  <div className="p-6 bg-gray-50 border border-gray-200">
-                    <p className="text-sm font-light text-gray-900 mb-2">{user.address.street}</p>
-                    <p className="text-sm font-light text-gray-900 mb-2">
+                  <div className="p-6 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800">
+                    <p className="text-sm font-light text-gray-900 dark:text-gray-300 mb-2">{user.address.street}</p>
+                    <p className="text-sm font-light text-gray-900 dark:text-gray-300 mb-2">
                       {user.address.city}, {user.address.state} {user.address.zipCode}
                     </p>
-                    <p className="text-sm font-light text-gray-900">{user.address.country}</p>
+                    <p className="text-sm font-light text-gray-900 dark:text-gray-300">{user.address.country}</p>
                   </div>
                 ) : (
                   <div className="space-y-4">
@@ -169,7 +169,7 @@ export default function Checkout() {
                       placeholder="Street Address"
                       value={formData.street}
                       onChange={(e) => setFormData({ ...formData, street: e.target.value })}
-                      className="w-full px-4 py-3 border-b border-gray-300 focus:border-black outline-none font-light"
+                      className="w-full px-4 py-3 border-b border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white outline-none font-light dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
                       required
                     />
                   <div className="grid grid-cols-2 gap-4">
@@ -178,7 +178,7 @@ export default function Checkout() {
                       placeholder="City"
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                      className="w-full px-4 py-3 border-b border-gray-300 focus:border-black outline-none font-light"
+                      className="w-full px-4 py-3 border-b border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white outline-none font-light dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
                       required
                     />
                     <input
@@ -186,7 +186,7 @@ export default function Checkout() {
                       placeholder="State"
                       value={formData.state}
                       onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                      className="w-full px-4 py-3 border-b border-gray-300 focus:border-black outline-none font-light"
+                      className="w-full px-4 py-3 border-b border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white outline-none font-light dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
                       required
                     />
                   </div>
@@ -196,7 +196,7 @@ export default function Checkout() {
                       placeholder="Zip Code"
                       value={formData.zipCode}
                       onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })}
-                      className="w-full px-4 py-3 border-b border-gray-300 focus:border-black outline-none font-light"
+                      className="w-full px-4 py-3 border-b border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white outline-none font-light dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
                       required
                     />
                     <input
@@ -204,7 +204,7 @@ export default function Checkout() {
                       placeholder="Country"
                       value={formData.country}
                       onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                      className="w-full px-4 py-3 border-b border-gray-300 focus:border-black outline-none font-light"
+                      className="w-full px-4 py-3 border-b border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white outline-none font-light dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
                       required
                     />
                   </div>
@@ -213,11 +213,11 @@ export default function Checkout() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-light mb-6">Payment Method</h2>
+                <h2 className="text-2xl font-light mb-6 dark:text-white">Payment Method</h2>
                 <select
                   value={formData.paymentMethod}
                   onChange={(e) => setFormData({ ...formData, paymentMethod: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 focus:border-black outline-none font-light"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white outline-none font-light dark:bg-gray-800 dark:text-white"
                   required
                 >
                   <option value="PayPal">PayPal</option>
@@ -229,7 +229,7 @@ export default function Checkout() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full px-8 py-4 bg-black text-white font-light text-lg hover:bg-gray-800 transition-colors disabled:bg-gray-400"
+                className="w-full px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-light text-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors disabled:bg-gray-400 dark:disabled:bg-gray-600"
               >
                 {loading ? "Processing..." : "Place Order"}
               </button>
@@ -237,30 +237,30 @@ export default function Checkout() {
           </div>
 
           <div>
-            <div className="border border-gray-200 p-6">
-              <h2 className="text-2xl font-light mb-6">Order Summary</h2>
+            <div className="border border-gray-200 dark:border-gray-800 p-6 dark:bg-gray-900">
+              <h2 className="text-2xl font-light mb-6 dark:text-white">Order Summary</h2>
               <div className="space-y-4 mb-6">
                 {cart.map((item) => (
-                  <div key={item._id} className="flex justify-between font-light text-sm">
+                  <div key={item._id} className="flex justify-between font-light text-sm dark:text-gray-300">
                     <span>{item.name} x {item.quantity}</span>
                     <span>${(item.price * item.quantity).toFixed(2)}</span>
                   </div>
                 ))}
               </div>
-              <div className="border-t border-gray-200 pt-4 space-y-4">
+              <div className="border-t border-gray-200 dark:border-gray-800 pt-4 space-y-4">
                 {/* Coupon Code Section */}
                 <div className="space-y-2">
-                  <label className="block text-xs text-gray-500 font-light tracking-wide">COUPON CODE</label>
+                  <label className="block text-xs text-gray-500 dark:text-gray-400 font-light tracking-wide">COUPON CODE</label>
                   {appliedCoupon ? (
-                    <div className="flex items-center justify-between p-3 bg-green-50 border border-green-200">
+                    <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
                       <div>
-                        <p className="text-sm font-light text-green-800">{appliedCoupon.code}</p>
-                        <p className="text-xs text-green-600">{appliedCoupon.discount}% discount applied</p>
+                        <p className="text-sm font-light text-green-800 dark:text-green-400">{appliedCoupon.code}</p>
+                        <p className="text-xs text-green-600 dark:text-green-500">{appliedCoupon.discount}% discount applied</p>
                       </div>
                       <button
                         type="button"
                         onClick={handleRemoveCoupon}
-                        className="text-xs text-red-500 hover:text-red-700 font-light"
+                        className="text-xs text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-light"
                       >
                         Remove
                       </button>
@@ -272,13 +272,13 @@ export default function Checkout() {
                         value={couponCode}
                         onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                         placeholder="Enter code"
-                        className="flex-1 px-3 py-2 border border-gray-300 font-light text-sm focus:outline-none focus:border-gray-400"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-700 font-light text-sm focus:outline-none focus:border-gray-400 dark:focus:border-gray-500 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
                       />
                       <button
                         type="button"
                         onClick={handleApplyCoupon}
                         disabled={applyingCoupon}
-                        className="px-4 py-2 bg-gray-900 text-white font-light text-sm hover:bg-gray-800 disabled:bg-gray-400"
+                        className="px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-black font-light text-sm hover:bg-gray-800 dark:hover:bg-gray-200 disabled:bg-gray-400 dark:disabled:bg-gray-600"
                       >
                         {applyingCoupon ? 'Checking...' : 'Apply'}
                       </button>
@@ -288,25 +288,25 @@ export default function Checkout() {
 
                 {/* Price Breakdown */}
                 <div className="space-y-2 pt-2">
-                  <div className="flex justify-between font-light text-sm">
+                  <div className="flex justify-between font-light text-sm dark:text-gray-300">
                     <span>Subtotal</span>
                     <span>${cartTotal.toFixed(2)}</span>
                   </div>
                   {appliedCoupon && (
-                    <div className="flex justify-between font-light text-sm text-green-600">
+                    <div className="flex justify-between font-light text-sm text-green-600 dark:text-green-500">
                       <span>Discount ({appliedCoupon.discount}%)</span>
                       <span>-${discountAmount.toFixed(2)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between font-light text-sm">
+                  <div className="flex justify-between font-light text-sm dark:text-gray-300">
                     <span>Shipping</span>
                     <span>${shippingPrice.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between font-light text-sm">
+                  <div className="flex justify-between font-light text-sm dark:text-gray-300">
                     <span>Tax (10%)</span>
                     <span>${taxPrice.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between font-light text-lg pt-4 border-t border-gray-200">
+                  <div className="flex justify-between font-light text-lg pt-4 border-t border-gray-200 dark:border-gray-800 dark:text-white">
                     <span>Total</span>
                     <span>${totalPrice.toFixed(2)}</span>
                   </div>

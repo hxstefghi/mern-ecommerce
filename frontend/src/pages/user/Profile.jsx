@@ -123,31 +123,31 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
-        <h1 className="text-2xl sm:text-3xl font-light text-gray-900 mb-8">
+        <h1 className="text-2xl sm:text-3xl font-light text-gray-900 dark:text-white mb-8">
           Profile
         </h1>
 
         {error && (
-          <div className="mb-6 border border-red-200 text-red-600 px-4 py-3 text-sm font-light">
+          <div className="mb-6 border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 px-4 py-3 text-sm font-light dark:bg-red-950/30">
             {error}
           </div>
         )}
 
         {success && (
-          <div className="mb-6 border border-green-200 text-green-600 px-4 py-3 text-sm font-light">
+          <div className="mb-6 border border-green-200 dark:border-green-900 text-green-600 dark:text-green-400 px-4 py-3 text-sm font-light dark:bg-green-950/30">
             {success}
           </div>
         )}
 
-        <div className="border border-gray-100 p-6 sm:p-8 mb-8">
+        <div className="border border-gray-100 dark:border-gray-800 p-6 sm:p-8 mb-8 dark:bg-gray-900">
           <div className="flex justify-between items-start mb-6">
-            <h2 className="text-lg font-light text-gray-900">Account Details</h2>
+            <h2 className="text-lg font-light text-gray-900 dark:text-white">Account Details</h2>
             {!isEditing && (
               <button
                 onClick={() => setIsEditing(true)}
-                className="text-sm text-gray-600 hover:text-gray-900 font-light underline"
+                className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-light underline"
               >
                 Edit
               </button>
@@ -157,22 +157,22 @@ export default function Profile() {
           {!isEditing ? (
             <div className="space-y-4">
               <div>
-                <label className="block text-xs text-gray-500 mb-1 font-light tracking-wide">
+                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 font-light tracking-wide">
                   NAME
                 </label>
-                <p className="text-sm text-gray-900 font-light">{user.name}</p>
+                <p className="text-sm text-gray-900 dark:text-gray-300 font-light">{user.name}</p>
               </div>
               <div>
-                <label className="block text-xs text-gray-500 mb-1 font-light tracking-wide">
+                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 font-light tracking-wide">
                   EMAIL
                 </label>
-                <p className="text-sm text-gray-900 font-light">{user.email}</p>
+                <p className="text-sm text-gray-900 dark:text-gray-300 font-light">{user.email}</p>
               </div>
             </div>
           ) : (
             <form onSubmit={handleUpdate} className="space-y-6">
               <div>
-                <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                <label className="block text-xs text-gray-500 dark:text-gray-300 mb-2 font-light tracking-wide">
                   NAME
                 </label>
                 <input
@@ -182,27 +182,27 @@ export default function Profile() {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                  className="w-full px-0 py-3 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-gray-900 dark:focus:border-gray-500 transition-colors bg-transparent text-sm font-light dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                <label className="block text-xs text-gray-500 dark:text-gray-300 mb-2 font-light tracking-wide">
                   EMAIL
                 </label>
-                <p className="text-sm text-gray-500 font-light py-3">
+                <p className="text-sm text-gray-500 dark:text-gray-400 font-light py-3">
                   {user.email} (cannot be changed)
                 </p>
               </div>
 
-              <div className="border-t border-gray-100 pt-6">
-                <h3 className="text-sm font-light text-gray-900 mb-4">
+              <div className="border-t border-gray-100 dark:border-gray-800 pt-6">
+                <h3 className="text-sm font-light text-gray-900 dark:text-white mb-4">
                   Change Password (Optional)
                 </h3>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                    <label className="block text-xs text-gray-500 dark:text-gray-300 mb-2 font-light tracking-wide">
                       CURRENT PASSWORD
                     </label>
                     <input
@@ -214,13 +214,13 @@ export default function Profile() {
                           currentPassword: e.target.value,
                         })
                       }
-                      className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                      className="w-full px-0 py-3 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-gray-900 dark:focus:border-gray-500 transition-colors bg-transparent text-sm font-light dark:text-white"
                       placeholder="Enter current password"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                    <label className="block text-xs text-gray-500 dark:text-gray-300 mb-2 font-light tracking-wide">
                       NEW PASSWORD
                     </label>
                     <input
@@ -229,13 +229,13 @@ export default function Profile() {
                       onChange={(e) =>
                         setFormData({ ...formData, newPassword: e.target.value })
                       }
-                      className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                      className="w-full px-0 py-3 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-gray-900 dark:focus:border-gray-500 transition-colors bg-transparent text-sm font-light dark:text-white"
                       placeholder="Enter new password"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                    <label className="block text-xs text-gray-500 dark:text-gray-300 mb-2 font-light tracking-wide">
                       CONFIRM NEW PASSWORD
                     </label>
                     <input
@@ -247,7 +247,7 @@ export default function Profile() {
                           confirmPassword: e.target.value,
                         })
                       }
-                      className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                      className="w-full px-0 py-3 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-gray-900 dark:focus:border-gray-500 transition-colors bg-transparent text-sm font-light dark:text-white"
                       placeholder="Confirm new password"
                     />
                   </div>
@@ -258,7 +258,7 @@ export default function Profile() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 bg-gray-900 text-white py-3 hover:bg-gray-800 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed text-sm font-light tracking-wide"
+                  className="flex-1 bg-gray-900 dark:bg-gray-800 text-white py-3 hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed text-sm font-light tracking-wide"
                 >
                   {loading ? "SAVING..." : "SAVE CHANGES"}
                 </button>
@@ -274,7 +274,7 @@ export default function Profile() {
                     });
                     setError("");
                   }}
-                  className="flex-1 border border-gray-200 text-gray-600 py-3 hover:border-gray-900 hover:text-gray-900 transition-colors text-sm font-light tracking-wide"
+                  className="flex-1 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-300 py-3 hover:border-gray-900 dark:hover:border-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors text-sm font-light tracking-wide"
                 >
                   CANCEL
                 </button>
@@ -284,13 +284,13 @@ export default function Profile() {
         </div>
 
         {/* Shipping Address Section */}
-        <div className="border border-gray-100 p-6 sm:p-8 mb-8">
+        <div className="border border-gray-100 dark:border-gray-800 p-6 sm:p-8 mb-8 dark:bg-gray-900">
           <div className="flex justify-between items-start mb-6">
-            <h2 className="text-lg font-light text-gray-900">Shipping Address</h2>
+            <h2 className="text-lg font-light text-gray-900 dark:text-white">Shipping Address</h2>
             {!isEditingAddress && (
               <button
                 onClick={() => setIsEditingAddress(true)}
-                className="text-sm text-gray-600 hover:text-gray-900 font-light underline"
+                className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-light underline"
               >
                 {user?.address?.street ? "Edit" : "Add"}
               </button>
@@ -302,48 +302,48 @@ export default function Profile() {
               {user?.address?.street ? (
                 <>
                   <div>
-                    <label className="block text-xs text-gray-500 mb-1 font-light tracking-wide">
+                    <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 font-light tracking-wide">
                       STREET
                     </label>
-                    <p className="text-sm text-gray-900 font-light">{user.address.street}</p>
+                    <p className="text-sm text-gray-900 dark:text-gray-300 font-light">{user.address.street}</p>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs text-gray-500 mb-1 font-light tracking-wide">
+                      <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 font-light tracking-wide">
                         CITY
                       </label>
-                      <p className="text-sm text-gray-900 font-light">{user.address.city}</p>
+                      <p className="text-sm text-gray-900 dark:text-gray-300 font-light">{user.address.city}</p>
                     </div>
                     <div>
-                      <label className="block text-xs text-gray-500 mb-1 font-light tracking-wide">
+                      <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 font-light tracking-wide">
                         STATE
                       </label>
-                      <p className="text-sm text-gray-900 font-light">{user.address.state}</p>
+                      <p className="text-sm text-gray-900 dark:text-gray-300 font-light">{user.address.state}</p>
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs text-gray-500 mb-1 font-light tracking-wide">
+                      <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 font-light tracking-wide">
                         ZIP CODE
                       </label>
-                      <p className="text-sm text-gray-900 font-light">{user.address.zipCode}</p>
+                      <p className="text-sm text-gray-900 dark:text-gray-300 font-light">{user.address.zipCode}</p>
                     </div>
                     <div>
-                      <label className="block text-xs text-gray-500 mb-1 font-light tracking-wide">
+                      <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 font-light tracking-wide">
                         COUNTRY
                       </label>
-                      <p className="text-sm text-gray-900 font-light">{user.address.country}</p>
+                      <p className="text-sm text-gray-900 dark:text-gray-300 font-light">{user.address.country}</p>
                     </div>
                   </div>
                 </>
               ) : (
-                <p className="text-sm text-gray-500 font-light">No shipping address saved</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 font-light">No shipping address saved</p>
               )}
             </div>
           ) : (
             <form onSubmit={handleAddressUpdate} className="space-y-6">
               <div>
-                <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                <label className="block text-xs text-gray-500 dark:text-gray-300 mb-2 font-light tracking-wide">
                   STREET ADDRESS
                 </label>
                 <input
@@ -351,13 +351,13 @@ export default function Profile() {
                   required
                   value={addressData.street}
                   onChange={(e) => setAddressData({ ...addressData, street: e.target.value })}
-                  className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                  className="w-full px-0 py-3 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-gray-900 dark:focus:border-gray-500 transition-colors bg-transparent text-sm font-light dark:text-white"
                   placeholder="Enter street address"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                  <label className="block text-xs text-gray-500 dark:text-gray-300 mb-2 font-light tracking-wide">
                     CITY
                   </label>
                   <input
@@ -365,12 +365,12 @@ export default function Profile() {
                     required
                     value={addressData.city}
                     onChange={(e) => setAddressData({ ...addressData, city: e.target.value })}
-                    className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                    className="w-full px-0 py-3 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-gray-900 dark:focus:border-gray-500 transition-colors bg-transparent text-sm font-light dark:text-white"
                     placeholder="City"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                  <label className="block text-xs text-gray-500 dark:text-gray-300 mb-2 font-light tracking-wide">
                     STATE
                   </label>
                   <input
@@ -378,14 +378,14 @@ export default function Profile() {
                     required
                     value={addressData.state}
                     onChange={(e) => setAddressData({ ...addressData, state: e.target.value })}
-                    className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                    className="w-full px-0 py-3 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-gray-900 dark:focus:border-gray-500 transition-colors bg-transparent text-sm font-light dark:text-white"
                     placeholder="State"
                   />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                  <label className="block text-xs text-gray-500 dark:text-gray-300 mb-2 font-light tracking-wide">
                     ZIP CODE
                   </label>
                   <input
@@ -393,12 +393,12 @@ export default function Profile() {
                     required
                     value={addressData.zipCode}
                     onChange={(e) => setAddressData({ ...addressData, zipCode: e.target.value })}
-                    className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                    className="w-full px-0 py-3 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-gray-900 dark:focus:border-gray-500 transition-colors bg-transparent text-sm font-light dark:text-white"
                     placeholder="Zip code"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-500 mb-2 font-light tracking-wide">
+                  <label className="block text-xs text-gray-500 dark:text-gray-300 mb-2 font-light tracking-wide">
                     COUNTRY
                   </label>
                   <input
@@ -406,7 +406,7 @@ export default function Profile() {
                     required
                     value={addressData.country}
                     onChange={(e) => setAddressData({ ...addressData, country: e.target.value })}
-                    className="w-full px-0 py-3 border-b border-gray-200 focus:outline-none focus:border-gray-900 transition-colors bg-transparent text-sm font-light"
+                    className="w-full px-0 py-3 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-gray-900 dark:focus:border-gray-500 transition-colors bg-transparent text-sm font-light dark:text-white"
                     placeholder="Country"
                   />
                 </div>
@@ -415,7 +415,7 @@ export default function Profile() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 bg-gray-900 text-white py-3 hover:bg-gray-800 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed text-sm font-light tracking-wide"
+                  className="flex-1 bg-gray-900 dark:bg-gray-800 text-white py-3 hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed text-sm font-light tracking-wide"
                 >
                   {loading ? "SAVING..." : "SAVE ADDRESS"}
                 </button>
@@ -432,7 +432,7 @@ export default function Profile() {
                     });
                     setError("");
                   }}
-                  className="flex-1 border border-gray-200 text-gray-600 py-3 hover:border-gray-900 hover:text-gray-900 transition-colors text-sm font-light tracking-wide"
+                  className="flex-1 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-300 py-3 hover:border-gray-900 dark:hover:border-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors text-sm font-light tracking-wide"
                 >
                   CANCEL
                 </button>
@@ -443,7 +443,7 @@ export default function Profile() {
 
         <button
           onClick={handleLogout}
-          className="w-full border border-gray-200 text-gray-600 py-3 hover:border-red-600 hover:text-red-600 transition-colors text-sm font-light tracking-wide"
+          className="w-full border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-300 py-3 hover:border-red-600 dark:hover:border-red-500 hover:text-red-600 dark:hover:text-red-500 transition-colors text-sm font-light tracking-wide"
         >
           LOGOUT
         </button>

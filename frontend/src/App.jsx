@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -29,9 +30,10 @@ import AdminCoupons from "./pages/admin/Coupons";
 export default function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <CartProvider>
-          <Toaster 
+      <ThemeProvider>
+        <AuthProvider>
+          <CartProvider>
+            <Toaster 
             position="top-center"
             toastOptions={{
               duration: 3000,
@@ -65,8 +67,9 @@ export default function App() {
             <Route path="/admin/categories" element={<AdminCategories />} />
             <Route path="/admin/coupons" element={<AdminCoupons />} />
           </Routes>
-        </CartProvider>
-      </AuthProvider>
+          </CartProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

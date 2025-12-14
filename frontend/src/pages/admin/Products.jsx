@@ -123,24 +123,24 @@ export default function AdminProducts() {
     <AdminLayout>
       <div className="p-4 sm:p-6 lg:p-8">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 sm:mb-8">
-          <h1 className="text-xl sm:text-2xl font-light text-gray-900">Product Management</h1>
+          <h1 className="text-xl sm:text-2xl font-light text-gray-900 dark:text-white">Product Management</h1>
           <button
             onClick={() => setShowModal(true)}
-            className="px-4 sm:px-6 py-2 cursor-pointer bg-black text-white font-light hover:bg-gray-800 transition-colors text-sm sm:text-base"
+            className="px-4 sm:px-6 py-2 cursor-pointer bg-black dark:bg-gray-900 text-white font-light hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors text-sm sm:text-base">
           >
             Add Product
           </button>
         </div>
 
-        <div className="border border-gray-200 overflow-x-auto bg-white">
+        <div className="border border-gray-200 dark:border-gray-800 overflow-x-auto bg-white dark:bg-gray-900">
           <table className="w-full min-w-[600px]">
-            <thead className="bg-gray-50">
+            <thead className="bg-gray-50 dark:bg-gray-800">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 uppercase tracking-wider">Image</th>
-                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 uppercase tracking-wider">Name</th>
-                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 uppercase tracking-wider">Price</th>
-                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 uppercase tracking-wider">Stock</th>
-                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wider">Image</th>
+                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wider">Name</th>
+                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wider">Price</th>
+                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wider">Stock</th>
+                <th className="px-6 py-3 text-left text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -173,9 +173,9 @@ export default function AdminProducts() {
         </div>
 
         {showModal && (
-          <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-8 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
-              <h2 className="text-2xl font-light mb-6">
+          <div className="fixed inset-0 bg-black/50 dark:bg-black/70 bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white dark:bg-gray-900 border dark:border-gray-800 p-8 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+              <h2 className="text-2xl font-light text-gray-900 dark:text-white mb-6">
                 {editingProduct ? "Edit Product" : "Add Product"}
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -185,7 +185,7 @@ export default function AdminProducts() {
                     placeholder="Product Name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-2 border-b border-gray-300 focus:border-black outline-none font-light"
+                    className="w-full px-4 py-2 border-b border-gray-300 dark:border-gray-700 bg-transparent dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light"
                     required
                   />
                 </div>
@@ -196,7 +196,7 @@ export default function AdminProducts() {
                     step="0.01"
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                    className="w-full px-4 py-2 border-b border-gray-300 focus:border-black outline-none font-light"
+                    className="w-full px-4 py-2 border-b border-gray-300 dark:border-gray-700 bg-transparent dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light"
                     required
                   />
                 </div>
@@ -206,7 +206,7 @@ export default function AdminProducts() {
                     placeholder="Image URL"
                     value={formData.image}
                     onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                    className="w-full px-4 py-2 border-b border-gray-300 focus:border-black outline-none font-light"
+                    className="w-full px-4 py-2 border-b border-gray-300 dark:border-gray-700 bg-transparent dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light"
                     required
                   />
                 </div>
@@ -215,7 +215,7 @@ export default function AdminProducts() {
                     placeholder="Description"
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 focus:border-black outline-none font-light"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-transparent dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light"
                     rows="3"
                     required
                   />
@@ -224,7 +224,7 @@ export default function AdminProducts() {
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-4 py-2 border-b border-gray-300 focus:border-black outline-none font-light"
+                    className="w-full px-4 py-2 border-b border-gray-300 dark:border-gray-700 bg-transparent dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light"
                   >
                     <option value="">Select Category</option>
                     {categories.map((cat) => (
@@ -240,7 +240,7 @@ export default function AdminProducts() {
                     placeholder="Stock"
                     value={formData.stock}
                     onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
-                    className="w-full px-4 py-2 border-b border-gray-300 focus:border-black outline-none font-light"
+                    className="w-full px-4 py-2 border-b border-gray-300 dark:border-gray-700 bg-transparent dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light"
                     required
                   />
                 </div>
@@ -250,21 +250,21 @@ export default function AdminProducts() {
                     placeholder="Count In Stock"
                     value={formData.countInStock}
                     onChange={(e) => setFormData({ ...formData, countInStock: e.target.value })}
-                    className="w-full px-4 py-2 border-b border-gray-300 focus:border-black outline-none font-light"
+                    className="w-full px-4 py-2 border-b border-gray-300 dark:border-gray-700 bg-transparent dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light"
                     required
                   />
                 </div>
                 <div className="flex space-x-4 pt-4">
                   <button
                     type="submit"
-                    className="flex-1 px-6 py-2 bg-black text-white font-light hover:bg-gray-800 transition-colors"
+                    className="flex-1 px-6 py-2 bg-black dark:bg-gray-900 text-white font-light hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
                   >
                     {editingProduct ? "Update" : "Create"}
                   </button>
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="flex-1 px-6 py-2 border border-gray-300 font-light hover:border-black transition-colors"
+                    className="flex-1 px-6 py-2 border border-gray-300 dark:border-gray-700 dark:text-gray-300 font-light hover:border-black dark:hover:border-gray-500 transition-colors"
                   >
                     Cancel
                   </button>

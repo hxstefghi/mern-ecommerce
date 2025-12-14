@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
 
 export default function AdminLayout({ children }) {
   const { user } = useAuth();
+  const { isDarkMode, toggleTheme } = useTheme();
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -65,17 +67,17 @@ export default function AdminLayout({ children }) {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-950">
       {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50">
+      <div className="lg:hidden fixed top-0 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 z-50">
         <div className="flex items-center justify-between px-4 py-3">
           <div>
-            <h1 className="text-base font-light text-gray-900">Admin Panel</h1>
-            <p className="text-xs text-gray-500 font-light">{user?.name}</p>
+            <h1 className="text-base font-light text-gray-900 dark:text-white">Admin Panel</h1>
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-light">{user?.name}</p>
           </div>
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 text-gray-600 hover:text-gray-900"
+            className="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -87,7 +89,7 @@ export default function AdminLayout({ children }) {
       {/* Mobile Sidebar Overlay */}
       {isSidebarOpen && (
         <div 
-          className="lg:hidden fixed inset-0 bg-black/50 z-40 mt-14"
+          className="lg:hidden fixed inset-0 bg-black/50 dark:bg-black/70 z-40 mt-14"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
@@ -95,25 +97,43 @@ export default function AdminLayout({ children }) {
       {/* Sidebar - Desktop & Mobile */}
       <aside className={`
         fixed top-14 lg:top-0 left-0 h-[calc(100vh-3.5rem)] lg:h-screen z-50
-        w-64 bg-white border-r border-gray-200 flex flex-col
+        w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col
         transform transition-transform duration-200 ease-in-out
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         {/* Sidebar Header */}
-        <div className="p-6 border-b border-gray-200">
+        <div className="p-6 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-lg font-light text-gray-900">Admin Panel</h1>
-              <p className="text-xs text-gray-500 font-light mt-1">{user?.name}</p>
+            <div className="flex-1">
+              <h1 className="text-lg font-light text-gray-900 dark:text-white">Admin Panel</h1>
+              <p className="text-xs text-gray-500 dark:text-gray-400 font-light mt-1">{user?.name}</p>
             </div>
-            <button
-              onClick={() => setIsSidebarOpen(false)}
-              className="lg:hidden p-1 text-gray-600 hover:text-gray-900"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+            <div className="flex items-center gap-2">
+              {/* Theme Toggle Button */}
+              <button
+                onClick={toggleTheme}
+                className="p-1.5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                aria-label="Toggle theme"
+              >
+                {isDarkMode ? (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                )}
+              </button>
+              <button
+                onClick={() => setIsSidebarOpen(false)}
+                className="lg:hidden p-1.5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -127,10 +147,10 @@ export default function AdminLayout({ children }) {
                   <Link
                     to={item.path}
                     onClick={() => setIsSidebarOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-3 text-sm font-light transition-colors ${
+                    className={`flex items-center gap-3 px-4 py-3 text-sm font-light transition-colors rounded-lg ${
                       isActive
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-700 hover:bg-gray-100"
+                        ? "bg-gray-900 text-white dark:bg-white dark:text-gray-900"
+                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                     }`}
                   >
                     {item.icon}
@@ -143,11 +163,11 @@ export default function AdminLayout({ children }) {
         </nav>
 
         {/* Sidebar Footer */}
-        <div className="p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-gray-200 dark:border-gray-800">
           <Link
             to="/"
             onClick={() => setIsSidebarOpen(false)}
-            className="flex items-center gap-3 px-4 py-3 text-sm font-light text-gray-700 hover:bg-gray-100 transition-colors"
+            className="flex items-center gap-3 px-4 py-3 text-sm font-light text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors rounded-lg"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -158,7 +178,7 @@ export default function AdminLayout({ children }) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto pt-16 lg:pt-0 lg:ml-64">
+      <main className="flex-1 overflow-auto pt-16 lg:pt-0 lg:ml-64 dark:bg-gray-950">
         {children}
       </main>
     </div>
