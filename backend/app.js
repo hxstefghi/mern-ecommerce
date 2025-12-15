@@ -11,23 +11,30 @@ import { errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
 
-app.use(cors({
-  origin: process.env.CLIENT_URL || "http://localhost:5173",
-  credentials: true,
-}));
+// CORS configuration - allow multiple origins
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'https://shoply-ecommerce-rose.vercel.app',
+  process.env.CLIENT_URL
+].filter(Boolean);
 
-app.use('/api', (req, res, next) => {
-	if (req.method === 'OPTIONS') {
-		const origin = req.headers.origin || corsOptions.origin || '*';
-		const reqHeaders = req.headers['access-control-request-headers'];
-		res.setHeader('Access-Control-Allow-Origin', origin);
-		res.setHeader('Access-Control-Allow-Methods', (corsOptions.methods || ['GET','POST','PUT','DELETE','OPTIONS']).join(','));
-		res.setHeader('Access-Control-Allow-Headers', reqHeaders || (corsOptions.allowedHeaders || ['Content-Type','Authorization']).join(','));
-		if (corsOptions.credentials) res.setHeader('Access-Control-Allow-Credentials', 'true');
-		return res.sendStatus(corsOptions.optionsSuccessStatus || 204);
-	}
-	next();
-});
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log('Blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+}));
 
 app.use(express.json());
 app.use(cookieParser());
