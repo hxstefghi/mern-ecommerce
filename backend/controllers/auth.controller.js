@@ -32,7 +32,14 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.clearCookie("jwt");
+  const isProduction = process.env.NODE_ENV === 'production';
+  
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax',
+    path: '/',
+  });
   res.json({ message: "Logged out" });
 };
 

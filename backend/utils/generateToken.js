@@ -5,10 +5,14 @@ export const generateToken = (id, res) => {
     expiresIn: "30d",
   });
 
+  // Cookie settings for cross-origin (production) and local development
+  const isProduction = process.env.NODE_ENV === 'production';
+  
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
-    maxAge: 30 * 24 * 60 * 60 * 1000
+    secure: isProduction, // true in production (HTTPS required)
+    sameSite: isProduction ? 'none' : 'lax', // 'none' for cross-origin in production
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    path: '/',
   });
 };
