@@ -15,6 +15,20 @@ app.use(cors({
   origin: process.env.CLIENT_URL || "http://localhost:5173",
   credentials: true,
 }));
+
+app.use('/api', (req, res, next) => {
+	if (req.method === 'OPTIONS') {
+		const origin = req.headers.origin || corsOptions.origin || '*';
+		const reqHeaders = req.headers['access-control-request-headers'];
+		res.setHeader('Access-Control-Allow-Origin', origin);
+		res.setHeader('Access-Control-Allow-Methods', (corsOptions.methods || ['GET','POST','PUT','DELETE','OPTIONS']).join(','));
+		res.setHeader('Access-Control-Allow-Headers', reqHeaders || (corsOptions.allowedHeaders || ['Content-Type','Authorization']).join(','));
+		if (corsOptions.credentials) res.setHeader('Access-Control-Allow-Credentials', 'true');
+		return res.sendStatus(corsOptions.optionsSuccessStatus || 204);
+	}
+	next();
+});
+
 app.use(express.json());
 app.use(cookieParser());
 
