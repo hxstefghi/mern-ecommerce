@@ -123,7 +123,7 @@ export default function OrderDetail() {
                     <p className="font-light dark:text-gray-300">{item.name}</p>
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">Quantity: {item.quantity}</p>
                   </div>
-                  <p className="font-light dark:text-gray-300">${(item.price * item.quantity).toFixed(2)}</p>
+                  <p className="font-light dark:text-gray-300">₱{(item.price * item.quantity).toFixed(2)}</p>
                 </div>
               ))}
             </div>
@@ -134,19 +134,25 @@ export default function OrderDetail() {
             <div className="space-y-2">
               <div className="flex justify-between font-light text-sm dark:text-gray-300">
                 <span>Items Price</span>
-                <span>${order.itemsPrice.toFixed(2)}</span>
+                <span>₱{order.itemsPrice.toFixed(2)}</span>
               </div>
+              {order.discount > 0 && (
+                <div className="flex justify-between font-light text-sm text-green-600 dark:text-green-400">
+                  <span>Discount {order.coupon && `(${order.coupon})`}</span>
+                  <span>-₱{order.discount.toFixed(2)}</span>
+                </div>
+              )}
               <div className="flex justify-between font-light text-sm dark:text-gray-300">
                 <span>Shipping</span>
-                <span>${order.shippingPrice.toFixed(2)}</span>
+                <span>₱{order.shippingPrice.toFixed(2)}</span>
               </div>
               <div className="flex justify-between font-light text-sm dark:text-gray-300">
                 <span>Tax</span>
-                <span>${order.taxPrice.toFixed(2)}</span>
+                <span>₱{order.taxPrice.toFixed(2)}</span>
               </div>
               <div className="flex justify-between font-light text-lg pt-4 border-t border-gray-200 dark:border-gray-800 dark:text-white">
                 <span>Total</span>
-                <span>${order.totalPrice.toFixed(2)}</span>
+                <span>₱{order.totalPrice.toFixed(2)}</span>
               </div>
             </div>
           </div>

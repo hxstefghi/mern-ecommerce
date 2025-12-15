@@ -10,7 +10,7 @@ export default function Products() {
 
   // Filter states
   const [searchQuery, setSearchQuery] = useState("");
-  const [priceRange, setPriceRange] = useState([0, 500]);
+  const [priceRange, setPriceRange] = useState([0, 5000]);
   const [selectedRating, setSelectedRating] = useState('all');
   const [sortBy, setSortBy] = useState("default");
 
@@ -67,7 +67,7 @@ export default function Products() {
 
   const resetFilters = () => {
     setSearchQuery("");
-    setPriceRange([0, 500]);
+    setPriceRange([0, 5000]);
     setSelectedRating('all');
     setSortBy("default");
   };
@@ -147,8 +147,8 @@ export default function Products() {
                     <input
                       type="range"
                       min="0"
-                      max="500"
-                      step="10"
+                      max="5000"
+                      step="50"
                       value={priceRange[1]}
                       onChange={(e) =>
                         setPriceRange([priceRange[0], Number(e.target.value)])
@@ -156,8 +156,8 @@ export default function Products() {
                       className="w-full accent-gray-900 dark:accent-white"
                     />
                     <div className="flex justify-between text-sm text-gray-600 font-light dark:text-gray-300">
-                      <span>${priceRange[0]}</span>
-                      <span>${priceRange[1]}</span>
+                      <span>₱{priceRange[0]}</span>
+                      <span>₱{priceRange[1]}</span>
                     </div>
                   </div>
                 </div>
@@ -258,8 +258,8 @@ export default function Products() {
                       <input
                         type="range"
                         min="0"
-                        max="500"
-                        step="10"
+                        max="5000"
+                        step="50"
                         value={priceRange[1]}
                         onChange={(e) =>
                           setPriceRange([priceRange[0], Number(e.target.value)])
@@ -267,8 +267,8 @@ export default function Products() {
                         className="w-full accent-gray-900 dark:accent-white"
                       />
                       <div className="flex justify-between text-sm text-gray-600 font-light dark:text-gray-300">
-                        <span>${priceRange[0]}</span>
-                        <span>${priceRange[1]}</span>
+                        <span>₱{priceRange[0]}</span>
+                        <span>₱{priceRange[1]}</span>
                       </div>
                     </div>
                   </div>

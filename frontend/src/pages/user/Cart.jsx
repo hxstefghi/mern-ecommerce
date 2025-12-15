@@ -82,7 +82,7 @@ export default function Cart() {
                   </div>
                   
                   <p className="text-sm text-gray-500 dark:text-gray-400 font-light mb-2">
-                    ${item.price.toFixed(2)} each
+                    ₱{item.price.toFixed(2)} each
                   </p>
                   
                   {/* Stock warning */}
@@ -142,7 +142,7 @@ export default function Cart() {
                     
                     <div className="text-right">
                       <p className="text-base font-light text-gray-900 dark:text-white">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ₱{(item.price * item.quantity).toFixed(2)}
                       </p>
                     </div>
                   </div>
@@ -157,7 +157,7 @@ export default function Cart() {
               <div className="space-y-2 sm:space-y-3 mb-6 text-sm font-light">
                 <div className="flex justify-between text-gray-600 dark:text-gray-300">
                   <span>Subtotal</span>
-                  <span>${cartTotal.toFixed(2)}</span>
+                  <span>₱{cartTotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-gray-600 dark:text-gray-300">
                   <span>Shipping</span>
@@ -167,7 +167,7 @@ export default function Cart() {
                   <div className="flex justify-between text-gray-900 dark:text-white">
                     <span>Total</span>
                     <span>
-                      ${cartTotal.toFixed(2)}
+                      ₱{cartTotal.toFixed(2)}
                     </span>
                   </div>
                 </div>

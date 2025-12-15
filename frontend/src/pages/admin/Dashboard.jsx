@@ -72,7 +72,7 @@ export default function AdminDashboard() {
                       Revenue
                     </p>
                     <p className="text-lg sm:text-2xl font-light text-gray-900 dark:text-white">
-                      ${analytics.totalRevenue.toFixed(2)}
+                      ₱{analytics.totalRevenue.toFixed(2)}
                     </p>
                   </div>
                   <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 sm:p-6">
@@ -164,7 +164,7 @@ export default function AdminDashboard() {
                         stroke="#3b82f6"
                         strokeWidth={2}
                         dot={{ fill: "#3b82f6", r: 4 }}
-                        name="Sales ($)"
+                        name="Sales (₱)"
                       />
                       <Line
                         type="monotone"
@@ -211,7 +211,7 @@ export default function AdminDashboard() {
                                 {product.totalSold}
                               </td>
                               <td className="py-3 px-4 sm:px-6 text-sm font-light text-gray-900 dark:text-gray-300 text-right">
-                                ${product.revenue.toFixed(2)}
+                                ₱{product.revenue.toFixed(2)}
                               </td>
                             </tr>
                           ))

@@ -46,7 +46,7 @@ export default function ProductCard({ product }) {
         </h2>
         <div className="flex items-center gap-2">
           <p className="text-sm text-gray-500 dark:text-gray-400 font-light">
-            P{product.price.toFixed(2)}
+            ₱{product.price.toFixed(2)}
           </p>
           {product.numReviews > 0 && (
             <div className="flex items-center gap-1 text-xs">

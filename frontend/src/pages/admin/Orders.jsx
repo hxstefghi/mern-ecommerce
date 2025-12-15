@@ -147,7 +147,7 @@ export default function AdminOrders() {
                 </div>
                 <div>
                   <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide">Total</p>
-                  <p className="font-light text-gray-900 dark:text-gray-300 mt-1">${order.totalPrice.toFixed(2)}</p>
+                  <p className="font-light text-gray-900 dark:text-gray-300 mt-1">₱{order.totalPrice.toFixed(2)}</p>
                 </div>
                 <div>
                   <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide">Status</p>
@@ -161,7 +161,7 @@ export default function AdminOrders() {
                 <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Items</p>
                 {order.orderItems.map((item, index) => (
                   <div key={index} className="font-light text-sm text-gray-900 dark:text-gray-300">
-                    {item.name} x {item.quantity} = ${(item.price * item.quantity).toFixed(2)}
+                    {item.name} x {item.quantity} = ₱{(item.price * item.quantity).toFixed(2)}
                   </div>
                 ))}
               </div>
@@ -179,7 +179,6 @@ export default function AdminOrders() {
                   value={order.status}
                   onChange={(e) => handleStatusChange(order._id, e.target.value)}
                   className="px-3 sm:px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 dark:text-white focus:border-black dark:focus:border-gray-500 outline-none font-light text-sm w-full sm:w-auto">
-                >
                   <option value="pending">Pending</option>
                   <option value="processing">Processing</option>
                   <option value="shipped">Shipped</option>

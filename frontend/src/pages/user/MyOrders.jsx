@@ -90,7 +90,7 @@ export default function MyOrders() {
                   </div>
                   <div>
                     <p className="text-xs font-light text-gray-500 dark:text-gray-400 uppercase tracking-wide">Total</p>
-                    <p className="font-light dark:text-gray-300">${order.totalPrice.toFixed(2)}</p>
+                    <p className="font-light dark:text-gray-300">₱{order.totalPrice.toFixed(2)}</p>
                   </div>
                   <div>
                     <span className={`px-4 py-2 text-sm font-light capitalize ${getStatusColor(order.status)}`}>

@@ -58,7 +58,7 @@ export default function Login() {
               type="email"
               required
               className="w-full px-0 py-3 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-gray-900 dark:focus:border-gray-100 transition-colors bg-transparent text-sm font-light dark:text-gray-300 placeholder:text-gray-400 dark:placeholder:text-gray-600"
-              placeholder="you@example.com"
+              placeholder="you@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

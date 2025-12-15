@@ -145,7 +145,7 @@ export default function AdminProducts() {
                     <img src={product.image} alt={product.name} className="w-16 h-16 object-cover" />
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap font-light text-gray-900 dark:text-gray-300">{product.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap font-light text-gray-900 dark:text-gray-300">${product.price}</td>
+                  <td className="px-6 py-4 whitespace-nowrap font-light text-gray-900 dark:text-gray-300">₱{product.price}</td>
                   <td className="px-6 py-4 whitespace-nowrap font-light text-gray-900 dark:text-gray-300">{product.stock}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-light">
                     <button

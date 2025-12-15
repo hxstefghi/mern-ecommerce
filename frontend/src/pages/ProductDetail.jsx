@@ -126,7 +126,7 @@ export default function ProductDetail() {
           <div className="flex flex-col">
             <h1 className="text-3xl font-light mb-4 text-gray-900 dark:text-gray-100">{product.name}</h1>
             <p className="text-xl font-light text-gray-900 dark:text-gray-100 mb-8">
-              ${product.price.toFixed(2)}
+              ₱{product.price.toFixed(2)}
             </p>
 
             <div className="mb-8">
